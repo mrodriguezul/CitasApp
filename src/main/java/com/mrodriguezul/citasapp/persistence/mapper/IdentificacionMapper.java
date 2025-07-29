@@ -7,6 +7,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface IdentificacionMapper {
     @Mappings({
@@ -19,5 +21,7 @@ public interface IdentificacionMapper {
     @InheritInverseConfiguration
     @Mapping(target = "persons", ignore = true)
     Identification toIdentification(Identificacion identificacion);
+
+    List<Identificacion> toIdentificaciones(List<Identification> identifications);
 }
 
