@@ -2,9 +2,11 @@ package com.mrodriguezul.citasapp.persistence;
 
 import com.mrodriguezul.citasapp.persistence.crud.DoctorCrudRepository;
 import com.mrodriguezul.citasapp.persistence.entity.Doctor;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class DoctorRepository {
     private DoctorCrudRepository doctorCrudRepository;
 
