@@ -18,12 +18,12 @@ public class IdentificacionController {
 
     @GetMapping("")
     ResponseEntity<List<Identificacion>> listarIdentificaciones(){
-        return new ResponseEntity<>(identificacionService.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(identificacionService.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{idIdentificacion}")
     public ResponseEntity<Identificacion> obtenerIdentificacion(@PathVariable("idIdentificacion") Long idIdentificacion){
-        return identificacionService.findById(idIdentificacion).map(identificacion -> {
+        return identificacionService.getIdentificacion(idIdentificacion).map(identificacion -> {
             return new ResponseEntity<>(identificacion, HttpStatus.OK);
         }).orElseGet(() -> {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -43,5 +43,4 @@ public class IdentificacionController {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
     }
-
 }

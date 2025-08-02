@@ -13,7 +13,7 @@ import java.util.List;
 public interface PersonaMapper {
     // Define mapping methods here if needed
     // For example, you can map between domain and entity classes related to Persona
-     @Mappings({
+     /*@Mappings({
          @Mapping(source = "id", target = "idPersona"),
          @Mapping(source = "identification", target = "identificacion"),
          @Mapping(source = "identificationNumber", target = "numeroIdentificacion"),
@@ -28,9 +28,10 @@ public interface PersonaMapper {
 
      @InheritInverseConfiguration
      @Mappings({
-         @Mapping(target = "doctors", ignore = true),
-         @Mapping(target = "patients", ignore = true)
+         @Mapping(target = "doctor", ignore = true),
+         @Mapping(target = "patient", ignore = true)
      })
-     Person toPerson(Persona persona);
+     Person toPerson(Persona persona);*/
+
 
 }

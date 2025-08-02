@@ -14,11 +14,11 @@ public class IdentificacionService {
     @Autowired
     private IdentificacionRepository identificacionRepository;
 
-    public List<Identificacion> findAll(){
+    public List<Identificacion> getAll(){
         return identificacionRepository.findAll();
     }
 
-    public Optional<Identificacion> findById(Long idIdentificacion){
+    public Optional<Identificacion> getIdentificacion(Long idIdentificacion){
         return identificacionRepository.findById(idIdentificacion);
     }
 
@@ -27,7 +27,7 @@ public class IdentificacionService {
     }
 
     public boolean delete(Long idIdentificacion){
-        return findById(idIdentificacion).map(identificacion -> {
+        return getIdentificacion(idIdentificacion).map(identificacion -> {
             identificacionRepository.delete(idIdentificacion);
             return true;
         }).orElse(false);

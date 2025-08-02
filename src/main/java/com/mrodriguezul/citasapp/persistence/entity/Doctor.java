@@ -10,7 +10,7 @@ public class Doctor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "person_id", insertable = false, updatable = false, nullable = false)
     private Person person;
 
