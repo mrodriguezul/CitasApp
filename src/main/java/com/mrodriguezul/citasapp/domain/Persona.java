@@ -4,9 +4,9 @@ import com.mrodriguezul.citasapp.persistence.entity.Identification;
 
 import java.util.Date;
 
-public class Persona {
+public abstract class Persona {
 
-    private Long idPersona;
+    private Long id;
     private Identificacion identificacion;
     private String numeroIdentificacion;
     private String nombres;
@@ -15,12 +15,19 @@ public class Persona {
     private String email;
     private String numeroTelefono;
 
-    public Long getIdPersona() {
-        return idPersona;
+    public Persona(Long id) {
+        this.id = id;
     }
 
-    public void setIdPersona(Long idPersona) {
-        this.idPersona = idPersona;
+    public Persona() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Identificacion getIdentificacion() {

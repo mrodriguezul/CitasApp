@@ -32,11 +32,11 @@ public class Person {
     @Column(length = 15)
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "person")
-    private List<Doctor> doctors;
+    @OneToOne(mappedBy = "person")
+    private Doctor doctor;
 
-    @OneToMany(mappedBy = "person")
-    private List<Patient> patients;
+    @OneToOne(mappedBy = "person")
+    private Patient patient;
 
     // Constructores
     public Person() {}
@@ -69,8 +69,20 @@ public class Person {
     public void setEmail(String email) { this.email = email; }
     public String getPhoneNumber() { return phoneNumber; }
     public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
-    public List<Doctor> getDoctors() { return doctors; }
-    public void setDoctors(List<Doctor> doctors) { this.doctors = doctors; }
-    public List<Patient> getPatients() { return patients; }
-    public void setPatients(List<Patient> patients) { this.patients = patients; }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
 }
