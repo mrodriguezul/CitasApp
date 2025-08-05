@@ -11,7 +11,7 @@ public class Person {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "identification_id", insertable = false, updatable = false, nullable = false)
+    @JoinColumn(name = "identification_id", nullable = false)
     private Identification identification;
 
     @Column(name = "identification_number", nullable = false, length = 20)

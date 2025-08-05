@@ -21,6 +21,16 @@ public interface DoctorMapper {
     })
     Doctor toDoctor(com.mrodriguezul.citasapp.persistence.entity.Doctor doctorEntity);
 
-    @InheritConfiguration
+    @Mappings({
+        @Mapping(source = "doctor", target = "person"),
+        @Mapping(source = "identificacion", target = "person.identification"),
+        @Mapping(source = "numeroIdentificacion", target = "person.identificationNumber"),
+        @Mapping(source = "nombres", target = "person.names"),
+        @Mapping(source = "apellidos", target = "person.surnames"),
+        @Mapping(source = "fechaNacimiento", target = "person.dateOfBirth"),
+        @Mapping(source = "email", target = "person.email"),
+        @Mapping(source = "numeroTelefono", target = "person.phoneNumber"),
+        @Mapping(source = "especialidad", target = "speciality")
+    })
     com.mrodriguezul.citasapp.persistence.entity.Doctor toDoctorEntity(Doctor doctor);
 }
