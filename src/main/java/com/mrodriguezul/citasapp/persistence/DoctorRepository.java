@@ -2,9 +2,12 @@ package com.mrodriguezul.citasapp.persistence;
 
 import com.mrodriguezul.citasapp.domain.Doctor;
 import com.mrodriguezul.citasapp.persistence.crud.DoctorCrudRepository;
+import com.mrodriguezul.citasapp.persistence.crud.PersonCrudRepository;
+import com.mrodriguezul.citasapp.persistence.entity.Person;
 import com.mrodriguezul.citasapp.persistence.mapper.DoctorMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,6 +16,9 @@ import java.util.Optional;
 public class DoctorRepository implements com.mrodriguezul.citasapp.domain.repository.DoctorRepository {
     @Autowired
     private DoctorCrudRepository doctorCrudRepository;
+
+    @Autowired
+    private PersonCrudRepository personCrudRepository;
 
     @Autowired
     private DoctorMapper mapper;
@@ -32,9 +38,18 @@ public class DoctorRepository implements com.mrodriguezul.citasapp.domain.reposi
     }
 
     @Override
+    @Transactional
     public Doctor save(Doctor doctor) {
-        com.mrodriguezul.citasapp.persistence.entity.Doctor entity = mapper.toDoctorEntity(doctor);
-        return mapper.toDoctor(doctorCrudRepository.save(entity));
+        com.mrodriguezul.citasapp.persistence.entity.Doctor doctorEntity = mapper.toDoctorEntity(doctor);
+
+        Person personEntity = doctorEntity.getPerson();
+        Person savedPerson = personCrudRepository.save(personEntity);
+
+        doctorEntity.setPerson(savedPerson);
+        doctorEntity.setId(null);
+
+        com.mrodriguezul.citasapp.persistence.entity.Doctor savedDoctor = doctorCrudRepository.save(doctorEntity);
+        return mapper.toDoctor(savedDoctor);
     }
 
     @Override

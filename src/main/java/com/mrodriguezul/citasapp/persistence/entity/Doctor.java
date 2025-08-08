@@ -11,11 +11,11 @@ public class Doctor {
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "person_id", insertable = false, updatable = false, nullable = false)
+    @JoinColumn(name = "person_id", nullable = false)
     private Person person;
 
     @ManyToOne
-    @JoinColumn(name = "speciality_id", insertable = false, updatable = false, nullable = false)
+    @JoinColumn(name = "speciality_id", nullable = false)
     private Speciality speciality;
 
     @OneToMany(mappedBy = "doctor")
