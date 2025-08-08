@@ -30,7 +30,8 @@ public interface DoctorMapper {
         @Mapping(source = "fechaNacimiento", target = "person.dateOfBirth"),
         @Mapping(source = "email", target = "person.email"),
         @Mapping(source = "numeroTelefono", target = "person.phoneNumber"),
-        @Mapping(source = "especialidad", target = "speciality")
+        @Mapping(source = "especialidad", target = "speciality"),
+        @Mapping(target = "appointments", ignore = true)
     })
     com.mrodriguezul.citasapp.persistence.entity.Doctor toDoctorEntity(Doctor doctor);
 }
