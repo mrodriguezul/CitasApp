@@ -18,8 +18,8 @@ target/
 *.iws
 *.iml
 *.ipr
-application-dev.properties
-application-pdn.properties
+#application-dev.properties
+#application-pdn.properties
 
 *.sql
 
