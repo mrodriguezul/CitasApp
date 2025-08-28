@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Tag(name = "Doctor", description = "Operacines relacionadas con doctores")
+@Tag(name = "Doctor", description = "Operacines relacionadas con doctores 👨‍🔬")
 @RestController
 @RequestMapping("/doctor")
 public class DoctorController {
