@@ -7,11 +7,11 @@ import java.util.*;
 @Table(name = "doctor")
 public class Doctor {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "person_id", nullable = false)
+    @MapsId
+    @JoinColumn(name = "id")
     private Person person;
 
     @ManyToOne

@@ -21,7 +21,7 @@ target/
 #application-dev.properties
 #application-pdn.properties
 
-*.sql
+#*.sql
 
 ### NetBeans ###
 /nbproject/private/

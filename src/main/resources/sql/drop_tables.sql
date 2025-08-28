@@ -1,0 +1,14 @@
+
+
+
+
+DROP TABLE IF EXISTS appointment;
+DROP TABLE IF EXISTS doctor;
+DROP TABLE IF EXISTS patient;
+DROP TABLE IF EXISTS person;
+DROP TABLE IF EXISTS speciality;
+DROP TABLE IF EXISTS identification;
+
+
+
+

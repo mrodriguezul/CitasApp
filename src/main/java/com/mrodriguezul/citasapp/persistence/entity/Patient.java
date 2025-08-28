@@ -7,11 +7,10 @@ import java.util.*;
 @Table(name = "patient")
 public class Patient {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "person_id", insertable = false, updatable = false, nullable = false)
+    @JoinColumn(name = "id", nullable = false)
     private Person person;
 
     @OneToMany(mappedBy = "patient")
