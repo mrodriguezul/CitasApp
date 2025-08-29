@@ -42,11 +42,8 @@ public class DoctorRepository implements com.mrodriguezul.citasapp.domain.reposi
     public Doctor save(Doctor doctor) {
         com.mrodriguezul.citasapp.persistence.entity.Doctor doctorEntity = mapper.toDoctorEntity(doctor);
 
-        Person personEntity = doctorEntity.getPerson();
-        Person savedPerson = personCrudRepository.save(personEntity);
-
+        Person savedPerson = personCrudRepository.save(doctorEntity.getPerson());
         doctorEntity.setPerson(savedPerson);
-        doctorEntity.setId(null);
 
         com.mrodriguezul.citasapp.persistence.entity.Doctor savedDoctor = doctorCrudRepository.save(doctorEntity);
         return mapper.toDoctor(savedDoctor);
