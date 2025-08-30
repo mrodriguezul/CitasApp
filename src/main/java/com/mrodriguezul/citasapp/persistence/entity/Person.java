@@ -17,10 +17,6 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "identification_id", nullable = false)
-    private Identification identification;
-
     @Column(name = "identification_number", nullable = false, length = 20)
     private String identificationNumber;
 
@@ -38,6 +34,10 @@ public class Person {
 
     @Column(length = 15)
     private String phoneNumber;
+
+    @ManyToOne
+    @JoinColumn(name = "identification_id", nullable = false)
+    private Identification identification;
 
     @OneToOne(mappedBy = "person")
     private Doctor doctor;

@@ -16,7 +16,7 @@ create table person (
   names varchar(30) not null,
   surnames varchar(40),
   date_of_birth date not null,
-  email varchar(20),
+  email varchar(30),
   phone_number varchar(15)
 );
 

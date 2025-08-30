@@ -18,7 +18,7 @@ public class Doctor {
 
     @OneToOne
     @MapsId
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "id", nullable = false)
     private Person person;
 
     @ManyToOne

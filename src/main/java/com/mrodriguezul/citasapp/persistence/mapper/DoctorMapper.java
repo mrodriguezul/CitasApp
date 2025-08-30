@@ -1,10 +1,7 @@
 package com.mrodriguezul.citasapp.persistence.mapper;
 
 import com.mrodriguezul.citasapp.domain.Doctor;
-import org.mapstruct.InheritConfiguration;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
+import org.mapstruct.*;
 
 @Mapper(componentModel = "spring", uses = {PersonaMapper.class, IdentificacionMapper.class, EspecialidadMapper.class})
 public interface DoctorMapper {
@@ -21,16 +18,9 @@ public interface DoctorMapper {
     })
     Doctor toDoctor(com.mrodriguezul.citasapp.persistence.entity.Doctor doctorEntity);
 
+    @InheritInverseConfiguration
     @Mappings({
-        @Mapping(source = "doctor", target = "person"),
-        @Mapping(source = "identificacion", target = "person.identification"),
-        @Mapping(source = "numeroIdentificacion", target = "person.identificationNumber"),
-        @Mapping(source = "nombres", target = "person.names"),
-        @Mapping(source = "apellidos", target = "person.surnames"),
-        @Mapping(source = "fechaNacimiento", target = "person.dateOfBirth"),
-        @Mapping(source = "email", target = "person.email"),
-        @Mapping(source = "numeroTelefono", target = "person.phoneNumber"),
-        @Mapping(source = "especialidad", target = "speciality"),
+        @Mapping(source = "id", target = "person.id"),
         @Mapping(target = "appointments", ignore = true)
     })
     com.mrodriguezul.citasapp.persistence.entity.Doctor toDoctorEntity(Doctor doctor);
