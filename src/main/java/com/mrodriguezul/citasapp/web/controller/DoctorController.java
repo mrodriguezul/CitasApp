@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,11 +48,27 @@ public class DoctorController {
     @Operation(summary = "Registrar un nuevo doctor", description = "Guarda la información de un nuevo doctor")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "201", description = "Doctor creado exitosamente"),
-        @ApiResponse(responseCode = "400", description = "Datos inválidos")
+        @ApiResponse(responseCode = "400", description = "Solicitud inválida")
     })
     @PostMapping
-    public Doctor save(@RequestBody Doctor doctor) {
-        return doctorService.save(doctor);
+    public ResponseEntity<Doctor> create(@RequestBody Doctor doctor) {
+        if(doctor.getId() == null || !doctorService.existsById(doctor.getId())) {
+            return ResponseEntity.status(HttpStatus.CREATED).body(doctorService.save(doctor));
+        }
+        return ResponseEntity.badRequest().build();
+    }
+
+    @Operation(summary = "Actualiza datos de un doctor", description = "Actualiza la información de un doctor")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Doctor actualizado exitosamente"),
+            @ApiResponse(responseCode = "400", description = "Solicitud inválida")
+    })
+    @PutMapping
+    public ResponseEntity<Doctor> update(@RequestBody Doctor doctor) {
+        if(doctor.getId() != null && doctorService.existsById(doctor.getId())) {
+            return ResponseEntity.status(HttpStatus.CREATED).body(doctorService.save(doctor));
+        }
+        return ResponseEntity.badRequest().build();
     }
 
     @Operation(summary = "Eliminar un doctor por ID", description = "Elimina el doctor especificado por su ID")

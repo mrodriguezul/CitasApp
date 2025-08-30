@@ -54,6 +54,11 @@ public class DoctorRepository implements com.mrodriguezul.citasapp.domain.reposi
         doctorCrudRepository.deleteById(id);
     }
 
+    @Override
+    public boolean existsById(Long id) {
+        return doctorCrudRepository.existsById(id);
+    }
+
 
     /*public DoctorRepository(DoctorCrudRepository doctorCrudRepository) {
         this.doctorCrudRepository = doctorCrudRepository;

@@ -9,5 +9,6 @@ public interface DoctorRepository {
     Optional<Doctor> findById(Long id);
     Doctor save(Doctor doctor);
     void delete(Long id);
+    boolean existsById(Long id);
 }
 

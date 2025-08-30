@@ -32,4 +32,8 @@ public class DoctorService {
             return true;
         }).orElse(false);
     }
+
+    public boolean existsById(Long id) {
+        return doctorRepository.existsById(id);
+    }
 }
