@@ -25,7 +25,31 @@ public class DoctorRepository implements com.mrodriguezul.citasapp.domain.reposi
 
     @Override
     public List<Doctor> findAll() {
-        return ((List<com.mrodriguezul.citasapp.persistence.entity.Doctor>) doctorCrudRepository.findAll())
+        return ((List<com.mrodriguezul.citasapp.persistence.entity.Doctor>) doctorCrudRepository.findAllByOrderByIdAsc())
+                .stream()
+                .map(mapper::toDoctor)
+                .toList();
+    }
+
+    @Override
+    public List<Doctor> findAllByNameOrSurname(String names, String surnames) {
+        return ((List<com.mrodriguezul.citasapp.persistence.entity.Doctor>) doctorCrudRepository.findAllByPerson_namesContainingIgnoreCaseOrPerson_surnamesContainingIgnoreCaseOrderByIdAsc(names, surnames))
+                .stream()
+                .map(mapper::toDoctor)
+                .toList();
+    }
+
+    @Override
+    public List<Doctor> findAllBySpeciality(Long specialityId) {
+        return ((List<com.mrodriguezul.citasapp.persistence.entity.Doctor>) doctorCrudRepository.findAllBySpeciality_IdOrderByIdAsc(specialityId))
+                .stream()
+                .map(mapper::toDoctor)
+                .toList();
+    }
+
+    @Override
+    public List<Doctor> findByIdentificationNumber(String identificationNumber) {
+        return ((List<com.mrodriguezul.citasapp.persistence.entity.Doctor>) doctorCrudRepository.findByPerson_IdentificationNumberOrderByIdAsc(identificationNumber))
                 .stream()
                 .map(mapper::toDoctor)
                 .toList();
@@ -34,6 +58,12 @@ public class DoctorRepository implements com.mrodriguezul.citasapp.domain.reposi
     @Override
     public Optional<Doctor> findById(Long id) {
         return doctorCrudRepository.findById(id)
+                .map(mapper::toDoctor);
+    }
+
+    @Override
+    public Optional<Doctor> findByIdentificationTypeAndIdentificationNumber(Long identificationId, String identificationNumber) {
+        return doctorCrudRepository.findByPerson_IdentificationIdAndPerson_IdentificationNumber(identificationId, identificationNumber)
                 .map(mapper::toDoctor);
     }
 

@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface DoctorCrudRepository extends JpaRepository<Doctor, Long> {
-    List<Doctor> findBySpeciality_IdOrderBySpeciality_Id(Long id);
-    Optional<Doctor> findByPerson_Id(Long personId);
-    Optional<Doctor> findByPerson_IdAndPerson_IdentificationNumber(Long personId, String identificationNumber);
+    List<Doctor> findAllByOrderByIdAsc();
+    List<Doctor> findAllByPerson_namesContainingIgnoreCaseOrPerson_surnamesContainingIgnoreCaseOrderByIdAsc(String names, String surnames);
+    List<Doctor> findAllBySpeciality_IdOrderByIdAsc(Long specialityId);
+    List<Doctor> findByPerson_IdentificationNumberOrderByIdAsc(String identificationNumber);
     Optional<Doctor> findByPerson_IdentificationIdAndPerson_IdentificationNumber(Long identificationId, String identificationNumber);
-
 }
