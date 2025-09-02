@@ -18,8 +18,24 @@ public class DoctorService {
         return doctorRepository.findAll();
     }
 
+    public List<Doctor> getAllByNameOrSurname(String names, String surnames) {
+        return doctorRepository.findAllByNameOrSurname(names, surnames);
+    }
+
+    public List<Doctor> getAllBySpeciality(Long specialityId) {
+        return doctorRepository.findAllBySpeciality(specialityId);
+    }
+
+    public Optional<Doctor> getAllByIdentificationNumber(String identificationNumber){
+        return doctorRepository.findByIdentificationNumber(identificationNumber);
+    }
+
     public Optional<Doctor> getDoctor(Long id) {
         return doctorRepository.findById(id);
+    }
+
+    public Optional<Doctor> getDoctorByIdentificationTypeAndIdentificationNumber(Long identificationId, String identificationNumber){
+        return doctorRepository.findByIdentificationTypeAndIdentificationNumber(identificationId, identificationNumber);
     }
 
     public Doctor save(Doctor doctor) {

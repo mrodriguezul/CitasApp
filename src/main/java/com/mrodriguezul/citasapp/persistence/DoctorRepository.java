@@ -48,12 +48,11 @@ public class DoctorRepository implements com.mrodriguezul.citasapp.domain.reposi
     }
 
     @Override
-    public List<Doctor> findByIdentificationNumber(String identificationNumber) {
-        return ((List<com.mrodriguezul.citasapp.persistence.entity.Doctor>) doctorCrudRepository.findByPerson_IdentificationNumberOrderByIdAsc(identificationNumber))
-                .stream()
-                .map(mapper::toDoctor)
-                .toList();
+    public Optional<Doctor> findByIdentificationNumber(String identificationNumber) {
+        return doctorCrudRepository.findByPerson_IdentificationNumberOrderByIdAsc(identificationNumber)
+                .map(mapper::toDoctor);
     }
+
 
     @Override
     public Optional<Doctor> findById(Long id) {
