@@ -23,7 +23,6 @@ public class Identification {
     @Column(nullable = false, length = 40)
     private String description;
 
-    @OneToMany(mappedBy = "identification")
+    @OneToMany(mappedBy = "identification", fetch = FetchType.LAZY)
     private List<Person> persons;
 }
-

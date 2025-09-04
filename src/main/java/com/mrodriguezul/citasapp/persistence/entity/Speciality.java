@@ -20,7 +20,6 @@ public class Speciality {
     @Column(nullable = false, length = 40)
     private String name;
 
-    @OneToMany(mappedBy = "speciality")
+    @OneToMany(mappedBy = "speciality", fetch = FetchType.LAZY)
     private List<Doctor> doctors;
 }
-

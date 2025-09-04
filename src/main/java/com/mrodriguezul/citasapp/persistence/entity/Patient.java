@@ -21,7 +21,7 @@ public class Patient {
     @JoinColumn(name = "id", nullable = false)
     private Person person;
 
-    @OneToMany(mappedBy = "patient")
+    @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
     private List<Appointment> appointments;
 }
 

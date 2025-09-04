@@ -20,8 +20,12 @@ import java.util.List;
 @RequestMapping("/identificacion")
 public class IdentificacionController {
 
+    private final IdentificacionService identificacionService;
+
     @Autowired
-    private IdentificacionService identificacionService;
+    public IdentificacionController(IdentificacionService identificacionService) {
+        this.identificacionService = identificacionService;
+    }
 
     @Operation(summary = "Listar todas las identificaciones", description = "Obtiene una lista de todas las identificaciones")
     @ApiResponse(responseCode = "200", description = "Listado exitoso")

@@ -21,11 +21,10 @@ public class Doctor {
     @JoinColumn(name = "id", nullable = false)
     private Person person;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "speciality_id", nullable = false)
     private Speciality speciality;
 
-    @OneToMany(mappedBy = "doctor")
+    @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY)
     private List<Appointment> appointments;
 }
-

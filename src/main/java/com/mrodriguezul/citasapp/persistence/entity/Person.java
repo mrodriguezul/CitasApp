@@ -29,13 +29,13 @@ public class Person {
     @Column(name = "date_of_birth", nullable = false)
     private Date dateOfBirth;
 
-    @Column(length = 20)
+    @Column(length = 30)
     private String email;
 
     @Column(length = 15)
     private String phoneNumber;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "identification_id", nullable = false)
     private Identification identification;
 
