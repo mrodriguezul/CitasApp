@@ -20,4 +20,8 @@ public class PacienteService {
     public Page<Paciente> getAll(int page, int size) {
         return pacienteRepository.findAll(page, size);
     }
+
+    public Page<Paciente> getAllByIdentificationId(Long personIdentificationId, int page, int size, String sortBy, String sortDir) {
+        return pacienteRepository.findAllByIdentificationId(personIdentificationId, page, size, sortBy, sortDir);
+    }
 }
