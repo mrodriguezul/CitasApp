@@ -22,6 +22,7 @@ public class Patient {
     private Person person;
 
     @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
+    @OrderBy("appointmentDate DESC")
     private List<Appointment> appointments;
 }
 
