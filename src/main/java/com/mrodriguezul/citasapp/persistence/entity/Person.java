@@ -1,10 +1,13 @@
 package com.mrodriguezul.citasapp.persistence.entity;
 
+import com.mrodriguezul.citasapp.persistence.audit.AuditEntity;
+import com.mrodriguezul.citasapp.persistence.audit.AuditPersonListener;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.*;
 
 @Entity
@@ -12,7 +15,8 @@ import java.util.*;
 @Setter
 @NoArgsConstructor
 @Table(name = "person")
-public class Person {
+@EntityListeners(AuditPersonListener.class)
+public class Person extends AuditEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -44,4 +48,18 @@ public class Person {
 
     @OneToOne(mappedBy = "person")
     private Patient patient;
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", identificationNumber='" + identificationNumber + '\'' +
+                ", names='" + names + '\'' +
+                ", surnames='" + surnames + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", identification=" + (identification != null ? identification.getId() : null) +
+                '}';
+    }
 }

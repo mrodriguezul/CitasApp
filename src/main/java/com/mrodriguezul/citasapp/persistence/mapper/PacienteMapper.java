@@ -22,6 +22,10 @@ public interface PacienteMapper {
     Paciente toPaciente(Patient patientEntity);
 
     @InheritConfiguration
+    @Mappings({
+            @Mapping(source = "id", target = "person.id"),
+            @Mapping(target = "appointments", ignore = true)
+    })
     Patient toPatientEntity(Paciente paciente);
 }
 
