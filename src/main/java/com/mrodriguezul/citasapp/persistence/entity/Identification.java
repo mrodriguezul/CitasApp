@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.*;
 
 @Entity
@@ -12,7 +13,7 @@ import java.util.*;
 @Setter
 @NoArgsConstructor
 @Table(name = "identification")
-public class Identification {
+public class Identification implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
