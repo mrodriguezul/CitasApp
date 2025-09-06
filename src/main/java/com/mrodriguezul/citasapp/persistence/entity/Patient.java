@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.*;
 
 @Entity
@@ -12,7 +13,7 @@ import java.util.*;
 @Setter
 @NoArgsConstructor
 @Table(name = "patient")
-public class Patient {
+public class Patient implements Serializable {
     @Id
     private Long id;
 
@@ -22,6 +23,6 @@ public class Patient {
     private Person person;
 
     @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
+    @OrderBy("appointmentDate DESC")
     private List<Appointment> appointments;
 }
-
