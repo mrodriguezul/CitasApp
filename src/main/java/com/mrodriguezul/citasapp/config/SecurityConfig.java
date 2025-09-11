@@ -46,7 +46,7 @@ public class SecurityConfig {
 
         UserDetails customer = User
                 .withUsername("customer")
-                .password(passwordEncoder().encode("qwerty123"))
+                .password(passwordEncoder().encode("qwerty1234"))
                 .roles("CUSTOMER")
                 .build();
         return new InMemoryUserDetailsManager(admin, customer);
