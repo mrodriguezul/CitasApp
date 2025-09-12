@@ -35,7 +35,7 @@ public class SecurityConfig {
         .httpBasic(Customizer.withDefaults());
         return http.build();
     }
-
+    /*
     @Bean
     public UserDetailsService userDetailsService() {
         UserDetails admin = User
@@ -51,6 +51,7 @@ public class SecurityConfig {
                 .build();
         return new InMemoryUserDetailsManager(admin, customer);
     }
+    */
 
     @Bean
     public PasswordEncoder passwordEncoder() {

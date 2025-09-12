@@ -1,4 +1,4 @@
--- user admi password: qwerty123
+-- user admin password: qwerty123
 -- user customer password: qwerty1234
 -- Use to generate hash: https://bcrypt.online/
 
