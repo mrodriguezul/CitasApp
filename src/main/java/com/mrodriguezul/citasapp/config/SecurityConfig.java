@@ -21,7 +21,9 @@ public class SecurityConfig {
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/auth/**", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                 .requestMatchers(HttpMethod.GET, "/identificacion/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/doctor/**").hasAnyRole("ADMIN", "CUSTOMER")
+                .requestMatchers(HttpMethod.GET, "/doctor").hasAuthority("VIEW_DOCTORS_ALL")
+                .requestMatchers(HttpMethod.GET, "/doctor/specialty/**").hasAuthority("VIEW_DOCTORS_BY_SPECIALTIES")
+                .requestMatchers(HttpMethod.GET, "/doctor/**").hasAnyRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/paciente/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.PUT, "/**").hasRole("ADMIN")
