@@ -1,8 +1,13 @@
 package com.mrodriguezul.citasapp.domain.service;
 
+import com.mrodriguezul.citasapp.config.JwtConfig;
 import com.mrodriguezul.citasapp.domain.Usuario;
 import com.mrodriguezul.citasapp.persistence.UserRepository;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -20,6 +25,11 @@ import java.util.Map;
 @Service
 public class UserSecurityService implements UserDetailsService {
 
+    @Autowired
+    private ObjectProvider<AuthenticationManager> authenticationManagerProvider;
+    private final JwtConfig jwtConfig;
+    private final UserRepository userRepository;
+
     // Authorities
     private static final String AUTHORITY_DOCTOR = "VIEW_DOCTORS_ALL";
     private static final String AUTHORITY_VIEW_SPECIALTIES = "VIEW_DOCTORS_BY_SPECIALTIES";
@@ -30,10 +40,9 @@ public class UserSecurityService implements UserDetailsService {
         "CUSTOMER", Arrays.asList(AUTHORITY_DOCTOR, AUTHORITY_VIEW_SPECIALTIES)
     );
 
-    private final UserRepository userRepository;
-
     @Autowired
-    public UserSecurityService(UserRepository userRepository) {
+    public UserSecurityService(JwtConfig jwtConfig, UserRepository userRepository) {
+        this.jwtConfig = jwtConfig;
         this.userRepository = userRepository;
     }
 
@@ -75,5 +84,16 @@ public class UserSecurityService implements UserDetailsService {
             }
         }
         return authorities;
+    }
+
+    public String loginUser(Usuario usuario) {
+        AuthenticationManager authenticationManager = authenticationManagerProvider.getIfAvailable();
+        UsernamePasswordAuthenticationToken login = new UsernamePasswordAuthenticationToken(usuario.getUsername(), usuario.getPassword());
+        Authentication authentication = authenticationManager.authenticate(login);
+        //System.out.println(authentication.isAuthenticated());
+        //System.out.println(authentication.getPrincipal());
+        String token = jwtConfig.createToken(usuario.getUsername());
+        System.out.println("Generated Token: " + token);
+        return token;
     }
 }

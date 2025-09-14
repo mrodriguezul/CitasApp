@@ -10,7 +10,6 @@ public class Usuario {
     private Boolean disabled;
     private List<Rol> roles;
 
-
     public Usuario() {
     }
 
