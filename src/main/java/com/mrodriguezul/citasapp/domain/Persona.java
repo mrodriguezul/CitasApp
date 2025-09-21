@@ -77,13 +77,6 @@ public abstract class Persona {
         }
     }
 
-    public Persona(Long id) {
-        this.id = id;
-    }
-
-    public Persona() {
-    }
-
     public Long getId() {
         return id;
     }
