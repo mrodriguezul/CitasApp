@@ -4,7 +4,6 @@ import com.mrodriguezul.citasapp.domain.Usuario;
 
 import java.util.Optional;
 
-public interface IUsuarioRepository {
+public interface UsuarioRepository {
     Optional<Usuario> findByUsername(String username);
-
 }

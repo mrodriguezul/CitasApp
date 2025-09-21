@@ -1,7 +1,8 @@
 package com.mrodriguezul.citasapp.domain;
 
-import com.mrodriguezul.citasapp.persistence.entity.Identification;
-
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.Date;
 
 public abstract class Persona {
@@ -14,6 +15,67 @@ public abstract class Persona {
     private Date fechaNacimiento;
     private String email;
     private String numeroTelefono;
+
+    public Persona(Long id) {
+        this.id = id;
+    }
+
+    public Persona() {
+    }
+
+    // Business logic methods
+    public String getNombreCompleto() {
+        if (nombres == null && apellidos == null) {
+            return "";
+        }
+        if (nombres == null) {
+            return apellidos;
+        }
+        if (apellidos == null) {
+            return nombres;
+        }
+        return nombres + " " + apellidos;
+    }
+
+    public int getEdad() {
+        if (fechaNacimiento == null) {
+            return 0;
+        }
+        LocalDate fechaNac = fechaNacimiento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        return Period.between(fechaNac, LocalDate.now()).getYears();
+    }
+
+    public boolean esMayorDeEdad() {
+        return getEdad() >= 18;
+    }
+
+    public boolean esEmailValido() {
+        if (email == null || email.trim().isEmpty()) {
+            return false;
+        }
+        return email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$");
+    }
+
+    public void validarDatos() {
+        if (nombres == null || nombres.trim().isEmpty()) {
+            throw new IllegalArgumentException("Los nombres son obligatorios");
+        }
+        if (apellidos == null || apellidos.trim().isEmpty()) {
+            throw new IllegalArgumentException("Los apellidos son obligatorios");
+        }
+        if (numeroIdentificacion == null || numeroIdentificacion.trim().isEmpty()) {
+            throw new IllegalArgumentException("El número de identificación es obligatorio");
+        }
+        if (identificacion == null) {
+            throw new IllegalArgumentException("El tipo de identificación es obligatorio");
+        }
+        if (fechaNacimiento == null) {
+            throw new IllegalArgumentException("La fecha de nacimiento es obligatoria");
+        }
+        if (email != null && !esEmailValido()) {
+            throw new IllegalArgumentException("El formato del email es inválido");
+        }
+    }
 
     public Persona(Long id) {
         this.id = id;

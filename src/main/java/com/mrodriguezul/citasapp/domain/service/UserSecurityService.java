@@ -2,7 +2,7 @@ package com.mrodriguezul.citasapp.domain.service;
 
 import com.mrodriguezul.citasapp.config.JwtConfig;
 import com.mrodriguezul.citasapp.domain.Usuario;
-import com.mrodriguezul.citasapp.persistence.UserRepository;
+import com.mrodriguezul.citasapp.domain.repository.UsuarioRepository;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,7 +28,7 @@ public class UserSecurityService implements UserDetailsService {
     @Autowired
     private ObjectProvider<AuthenticationManager> authenticationManagerProvider;
     private final JwtConfig jwtConfig;
-    private final UserRepository userRepository;
+    private final UsuarioRepository userRepository;
 
     // Authorities
     private static final String AUTHORITY_DOCTOR = "VIEW_DOCTORS_ALL";
@@ -41,7 +41,7 @@ public class UserSecurityService implements UserDetailsService {
     );
 
     @Autowired
-    public UserSecurityService(JwtConfig jwtConfig, UserRepository userRepository) {
+    public UserSecurityService(JwtConfig jwtConfig, UsuarioRepository userRepository) {
         this.jwtConfig = jwtConfig;
         this.userRepository = userRepository;
     }
