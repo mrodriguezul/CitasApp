@@ -37,4 +37,22 @@ create table appointment (
   reason text not null
 );
 
+create table users (
+    username varchar(30)  not null primary key,
+    password varchar(100) not null,
+    email    varchar(50),
+    locked   boolean      not null,
+    disabled boolean      not null
+);
+
+CREATE TABLE users_role (
+    username VARCHAR(50) NOT NULL,
+    role VARCHAR(50) NOT NULL,
+    granted_date TIMESTAMP NOT NULL,
+    PRIMARY KEY (username, role),
+    CONSTRAINT fk_users_role_user
+        FOREIGN KEY (username)
+            REFERENCES users(username)
+);
+
 

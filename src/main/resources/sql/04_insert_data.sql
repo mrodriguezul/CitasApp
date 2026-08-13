@@ -1,4 +1,4 @@
--- Script de inserción de datos de ejemplo para create_database.sql
+-- Script de inserción de datos de ejemplo para 01_create_database.sql
 
 -- Tabla identification
 insert into identification (name, description) values
