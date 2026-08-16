@@ -17,12 +17,12 @@ public class Doctor implements Serializable {
     @Id
     private Long id;
 
-    @OneToOne
+    @OneToOne(fetch =  FetchType.LAZY)
     @MapsId
     @JoinColumn(name = "id", nullable = false)
     private Person person;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "speciality_id", nullable = false)
     private Speciality speciality;
 

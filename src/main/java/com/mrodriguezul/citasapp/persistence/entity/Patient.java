@@ -17,7 +17,7 @@ public class Patient implements Serializable {
     @Id
     private Long id;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @MapsId
     @JoinColumn(name = "id", nullable = false)
     private Person person;

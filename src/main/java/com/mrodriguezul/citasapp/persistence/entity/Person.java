@@ -39,7 +39,7 @@ public class Person extends AuditEntity implements Serializable {
     @Column(length = 15)
     private String phoneNumber;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "identification_id", nullable = false)
     private Identification identification;
 
