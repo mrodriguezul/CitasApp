@@ -1,7 +1,7 @@
 package com.mrodriguezul.citasapp.persistence;
 
 import com.mrodriguezul.citasapp.domain.Identificacion;
-import com.mrodriguezul.citasapp.domain.repository.IdentificacionRepository;
+import com.mrodriguezul.citasapp.domain.repository.IIdentificationRepository;
 import com.mrodriguezul.citasapp.persistence.crud.IdentificationCrudRepository;
 import com.mrodriguezul.citasapp.persistence.entity.Identification;
 import com.mrodriguezul.citasapp.persistence.mapper.IdentificacionMapper;
@@ -12,15 +12,16 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class IdentificationRepository implements IdentificacionRepository {
-    @Autowired
+public class IdentificationRepository implements IIdentificationRepository {
+
     private IdentificationCrudRepository identificationCrudRepository;
-    @Autowired
     private IdentificacionMapper mapper;
 
-    /*public IdentificationRepository(IdentificationCrudRepository productCrudRepository) {
-        this.identificationCrudRepository = productCrudRepository;
-    }*/
+    @Autowired
+    public IdentificationRepository(IdentificationCrudRepository identificationCrudRepository, IdentificacionMapper mapper) {
+        this.identificationCrudRepository = identificationCrudRepository;
+        this.mapper = mapper;
+    }
 
     @Override
     public List<Identificacion> findAll() {
@@ -35,8 +36,14 @@ public class IdentificationRepository implements IdentificacionRepository {
     }
 
     @Override
+    public boolean existsById(Long idIdentificacion) {
+        return this.identificationCrudRepository.existsById(idIdentificacion);
+    }
+
+    @Override
     public Identificacion save(Identificacion identificacion) {
         Identification identification = mapper.toIdentification(identificacion);
+        //identificationCrudRepository.existsById(identification.getId());
         return mapper.toIdentificacion(identificationCrudRepository.save(identification));
     }
 

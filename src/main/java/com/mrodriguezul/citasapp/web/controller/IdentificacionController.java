@@ -38,9 +38,8 @@ public class IdentificacionController {
         @ApiResponse(responseCode = "500", description = "Error interno del servidor")
     })
     @GetMapping("")
-    ResponseEntity<List<Identificacion>> listarIdentificaciones(){
+    ResponseEntity<List<Identificacion>> listAll(){
         try {
-            logger.info("Iniciando consulta de todas las identificaciones");
             List<Identificacion> identificaciones = identificacionService.getAll();
             logger.info("Consulta exitosa, se encontraron {} identificaciones", identificaciones.size());
             return new ResponseEntity<>(identificaciones, HttpStatus.OK);
@@ -61,7 +60,7 @@ public class IdentificacionController {
             @Parameter(name = "idIdentificacion", description = "ID de la identificación a buscar", required = true, example = "2")
     })
     @GetMapping("/{idIdentificacion}")
-    public ResponseEntity<Identificacion> obtenerIdentificacion(@PathVariable("idIdentificacion") Long idIdentificacion){
+    public ResponseEntity<Identificacion> getById(@PathVariable("idIdentificacion") Long idIdentificacion){
         try {
             logger.info("Consultando identificación con ID: {}", idIdentificacion);
 
@@ -87,20 +86,47 @@ public class IdentificacionController {
     @ApiResponses(value = {
         @ApiResponse(responseCode = "201", description = "Identificación creada exitosamente"),
         @ApiResponse(responseCode = "400", description = "Datos inválidos"),
+        @ApiResponse(responseCode = "409", description = "Identificación ya existe"),
         @ApiResponse(responseCode = "500", description = "Error interno del servidor")
     })
     @PostMapping()
-    public ResponseEntity<Identificacion> guardarIdentificacion(@Valid @RequestBody Identificacion identificacion){
+    public ResponseEntity<Identificacion> save(@Valid @RequestBody Identificacion identificacion){
         try {
-            logger.info("Guardando nueva identificación: {}", identificacion.getNombre());
-
-            Identificacion identificacionGuardada = identificacionService.save(identificacion);
-            logger.info("Identificación guardada exitosamente con ID: {}", identificacionGuardada.getIdIdentificacion());
-            return new ResponseEntity<>(identificacionGuardada, HttpStatus.CREATED);
+            if(identificacion.getIdIdentificacion() == null || !identificacionService.existsById(identificacion.getIdIdentificacion())){
+                Identificacion identificacionGuardada = identificacionService.save(identificacion);
+                logger.info("Identificación guardada exitosamente con ID: {}", identificacionGuardada.getIdIdentificacion());
+                return new ResponseEntity<>(identificacionGuardada, HttpStatus.CREATED);
+            }else{
+                logger.warn("La identificación con ID {} ya existe, no se puede guardar", identificacion.getIdIdentificacion());
+                return new ResponseEntity<>(HttpStatus.CONFLICT);
+            }
         } catch (Exception e) {
             logger.error("Error al guardar identificación: ", e);
-            throw new ValidationException("Errorzo!!");
-            //throw new RuntimeException("Error al guardar la nueva identificación", e);
+            throw new ValidationException("Validation failed for the provided identification data: " + e.getMessage(), e);
+        }
+    }
+
+    @Operation(summary = "Actualizar identificación", description = "Actualiza la información de identificación")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Identificación actualizada exitosamente"),
+            @ApiResponse(responseCode = "400", description = "Datos inválidos"),
+            @ApiResponse(responseCode = "404", description = "Identificación no encontrada"),
+            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    })
+    @PutMapping()
+    public ResponseEntity<Identificacion> update(@Valid @RequestBody Identificacion identificacion){
+        try {
+            if(identificacion.getIdIdentificacion() != null && identificacionService.existsById(identificacion.getIdIdentificacion())){
+                Identificacion identificacionActualizada = identificacionService.save(identificacion);
+                logger.info("Identificación actualizada exitosamente con ID: {}", identificacionActualizada.getIdIdentificacion());
+                return new ResponseEntity<>(identificacionActualizada, HttpStatus.OK);
+            }else{
+                logger.warn("La identificación con ID {} No existe, no se puede actualizar", identificacion.getIdIdentificacion());
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            logger.error("Error al actualizar identificación: ", e);
+            throw new ValidationException("Validation failed for the provided identification data: " + e.getMessage(), e);
         }
     }
 
@@ -112,7 +138,7 @@ public class IdentificacionController {
         @ApiResponse(responseCode = "500", description = "Error interno del servidor")
     })
     @DeleteMapping("/{idIdentificacion}")
-    public ResponseEntity<Void> eliminarIdentificacion(@PathVariable("idIdentificacion") Long idIdentificacion){
+    public ResponseEntity<Void> delete(@PathVariable("idIdentificacion") Long idIdentificacion){
         try {
             logger.info("Eliminando identificación con ID: {}", idIdentificacion);
 
