@@ -1,4 +1,4 @@
-package com.mrodriguezul.citasapp.persistence;
+package com.mrodriguezul.citasapp.persistence.adapter;
 
 import com.mrodriguezul.citasapp.persistence.crud.PersonCrudRepository;
 import com.mrodriguezul.citasapp.persistence.entity.Person;

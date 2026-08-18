@@ -1,4 +1,4 @@
-package com.mrodriguezul.citasapp.persistence;
+package com.mrodriguezul.citasapp.persistence.adapter;
 
 import com.mrodriguezul.citasapp.domain.model.Usuario;
 import com.mrodriguezul.citasapp.domain.repository.IUsuarioRepository;
