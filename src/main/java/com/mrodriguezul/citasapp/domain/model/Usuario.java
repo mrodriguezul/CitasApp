@@ -1,4 +1,4 @@
-package com.mrodriguezul.citasapp.domain;
+package com.mrodriguezul.citasapp.domain.model;
 
 import java.util.List;
 

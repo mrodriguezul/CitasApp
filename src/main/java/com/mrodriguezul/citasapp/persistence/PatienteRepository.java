@@ -1,9 +1,8 @@
 package com.mrodriguezul.citasapp.persistence;
 
-import com.mrodriguezul.citasapp.domain.Paciente;
+import com.mrodriguezul.citasapp.domain.model.Paciente;
 import com.mrodriguezul.citasapp.domain.repository.IPacienteRepository;
 import com.mrodriguezul.citasapp.persistence.crud.PatientPagSortRepository;
-import com.mrodriguezul.citasapp.persistence.entity.Patient;
 import com.mrodriguezul.citasapp.persistence.mapper.PacienteMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

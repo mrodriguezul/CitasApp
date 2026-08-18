@@ -1,6 +1,6 @@
 package com.mrodriguezul.citasapp.persistence;
 
-import com.mrodriguezul.citasapp.domain.Usuario;
+import com.mrodriguezul.citasapp.domain.model.Usuario;
 import com.mrodriguezul.citasapp.domain.repository.IUsuarioRepository;
 import com.mrodriguezul.citasapp.persistence.crud.UserCrudRepository;
 import com.mrodriguezul.citasapp.persistence.mapper.UsuarioMapper;

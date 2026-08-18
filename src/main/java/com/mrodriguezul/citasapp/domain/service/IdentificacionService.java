@@ -1,6 +1,6 @@
 package com.mrodriguezul.citasapp.domain.service;
 
-import com.mrodriguezul.citasapp.domain.Identificacion;
+import com.mrodriguezul.citasapp.domain.model.Identificacion;
 import com.mrodriguezul.citasapp.domain.repository.IIdentificationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

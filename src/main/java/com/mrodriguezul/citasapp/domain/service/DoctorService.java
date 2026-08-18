@@ -1,6 +1,6 @@
 package com.mrodriguezul.citasapp.domain.service;
 
-import com.mrodriguezul.citasapp.domain.Doctor;
+import com.mrodriguezul.citasapp.domain.model.Doctor;
 import com.mrodriguezul.citasapp.domain.repository.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

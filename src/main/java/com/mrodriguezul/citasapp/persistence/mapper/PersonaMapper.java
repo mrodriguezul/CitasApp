@@ -1,13 +1,6 @@
 package com.mrodriguezul.citasapp.persistence.mapper;
 
-import com.mrodriguezul.citasapp.domain.Persona;
-import com.mrodriguezul.citasapp.persistence.entity.Person;
-import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
-
-import java.util.List;
 
 @Mapper(componentModel = "spring", uses = {IdentificacionMapper.class})
 public interface PersonaMapper {

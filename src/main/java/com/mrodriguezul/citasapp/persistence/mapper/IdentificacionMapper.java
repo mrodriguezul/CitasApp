@@ -1,6 +1,6 @@
 package com.mrodriguezul.citasapp.persistence.mapper;
 
-import com.mrodriguezul.citasapp.domain.Identificacion;
+import com.mrodriguezul.citasapp.domain.model.Identificacion;
 import com.mrodriguezul.citasapp.persistence.entity.Identification;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;

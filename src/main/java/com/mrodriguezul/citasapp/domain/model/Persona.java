@@ -1,6 +1,4 @@
-package com.mrodriguezul.citasapp.domain;
-
-import com.mrodriguezul.citasapp.persistence.entity.Identification;
+package com.mrodriguezul.citasapp.domain.model;
 
 import java.util.Date;
 

@@ -1,6 +1,6 @@
 package com.mrodriguezul.citasapp.web.controller;
 
-import com.mrodriguezul.citasapp.domain.Identificacion;
+import com.mrodriguezul.citasapp.domain.model.Identificacion;
 import com.mrodriguezul.citasapp.domain.service.IdentificacionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

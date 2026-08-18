@@ -1,6 +1,6 @@
 package com.mrodriguezul.citasapp.web.controller;
 
-import com.mrodriguezul.citasapp.domain.Usuario;
+import com.mrodriguezul.citasapp.domain.model.Usuario;
 import com.mrodriguezul.citasapp.domain.service.UserSecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;

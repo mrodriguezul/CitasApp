@@ -1,7 +1,7 @@
 package com.mrodriguezul.citasapp.domain.service;
 
 import com.mrodriguezul.citasapp.config.JwtConfig;
-import com.mrodriguezul.citasapp.domain.Usuario;
+import com.mrodriguezul.citasapp.domain.model.Usuario;
 import com.mrodriguezul.citasapp.persistence.UserRepository;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;

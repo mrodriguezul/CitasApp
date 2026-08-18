@@ -1,7 +1,7 @@
 package com.mrodriguezul.citasapp.web.controller;
 
 
-import com.mrodriguezul.citasapp.domain.Doctor;
+import com.mrodriguezul.citasapp.domain.model.Doctor;
 import com.mrodriguezul.citasapp.domain.service.DoctorService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

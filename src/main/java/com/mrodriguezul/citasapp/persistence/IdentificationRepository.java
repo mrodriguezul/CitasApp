@@ -1,6 +1,6 @@
 package com.mrodriguezul.citasapp.persistence;
 
-import com.mrodriguezul.citasapp.domain.Identificacion;
+import com.mrodriguezul.citasapp.domain.model.Identificacion;
 import com.mrodriguezul.citasapp.domain.repository.IIdentificationRepository;
 import com.mrodriguezul.citasapp.persistence.crud.IdentificationCrudRepository;
 import com.mrodriguezul.citasapp.persistence.entity.Identification;

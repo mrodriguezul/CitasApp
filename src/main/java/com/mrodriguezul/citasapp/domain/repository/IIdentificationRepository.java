@@ -1,6 +1,6 @@
 package com.mrodriguezul.citasapp.domain.repository;
 
-import com.mrodriguezul.citasapp.domain.Identificacion;
+import com.mrodriguezul.citasapp.domain.model.Identificacion;
 
 import java.util.List;
 import java.util.Optional;

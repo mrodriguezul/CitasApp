@@ -1,7 +1,6 @@
 package com.mrodriguezul.citasapp.domain.service;
 
-import com.mrodriguezul.citasapp.domain.Doctor;
-import com.mrodriguezul.citasapp.domain.Paciente;
+import com.mrodriguezul.citasapp.domain.model.Paciente;
 import com.mrodriguezul.citasapp.persistence.PatienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

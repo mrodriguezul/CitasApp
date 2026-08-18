@@ -1,6 +1,6 @@
 package com.mrodriguezul.citasapp.persistence.mapper;
 
-import com.mrodriguezul.citasapp.domain.Paciente;
+import com.mrodriguezul.citasapp.domain.model.Paciente;
 import com.mrodriguezul.citasapp.persistence.entity.Patient;
 import org.mapstruct.InheritConfiguration;
 import org.mapstruct.Mapper;

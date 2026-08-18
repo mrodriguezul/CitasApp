@@ -1,6 +1,6 @@
 package com.mrodriguezul.citasapp.persistence.mapper;
 
-import com.mrodriguezul.citasapp.domain.Doctor;
+import com.mrodriguezul.citasapp.domain.model.Doctor;
 import org.mapstruct.*;
 
 @Mapper(componentModel = "spring", uses = {PersonaMapper.class, IdentificacionMapper.class, EspecialidadMapper.class})

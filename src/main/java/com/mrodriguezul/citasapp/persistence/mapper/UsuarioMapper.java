@@ -1,7 +1,7 @@
 package com.mrodriguezul.citasapp.persistence.mapper;
 
-import com.mrodriguezul.citasapp.domain.Rol;
-import com.mrodriguezul.citasapp.domain.Usuario;
+import com.mrodriguezul.citasapp.domain.model.Rol;
+import com.mrodriguezul.citasapp.domain.model.Usuario;
 import com.mrodriguezul.citasapp.persistence.entity.UserEntity;
 import com.mrodriguezul.citasapp.persistence.entity.UserRoleEntity;
 import org.mapstruct.InheritInverseConfiguration;

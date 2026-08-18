@@ -1,6 +1,6 @@
 package com.mrodriguezul.citasapp.persistence;
 
-import com.mrodriguezul.citasapp.domain.Doctor;
+import com.mrodriguezul.citasapp.domain.model.Doctor;
 import com.mrodriguezul.citasapp.persistence.crud.DoctorCrudRepository;
 import com.mrodriguezul.citasapp.persistence.crud.PersonCrudRepository;
 import com.mrodriguezul.citasapp.persistence.entity.Person;

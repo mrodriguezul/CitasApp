@@ -1,6 +1,6 @@
 package com.mrodriguezul.citasapp.domain.repository;
 
-import com.mrodriguezul.citasapp.domain.Doctor;
+import com.mrodriguezul.citasapp.domain.model.Doctor;
 import java.util.List;
 import java.util.Optional;
 

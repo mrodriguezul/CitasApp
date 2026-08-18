@@ -1,6 +1,6 @@
 package com.mrodriguezul.citasapp.persistence.mapper;
 
-import com.mrodriguezul.citasapp.domain.Especialidad;
+import com.mrodriguezul.citasapp.domain.model.Especialidad;
 import com.mrodriguezul.citasapp.persistence.entity.Speciality;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
