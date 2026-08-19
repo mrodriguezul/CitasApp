@@ -13,7 +13,7 @@ import java.util.*;
 @Setter
 @NoArgsConstructor
 @Table(name = "appointment")
-public class Appointment implements Serializable {
+public class AppointmentEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,9 +26,9 @@ public class Appointment implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "doctor_id", nullable = false)
-    private Doctor doctor;
+    private DoctorEntity doctorEntity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "patient_id", nullable = false)
-    private Patient patient;
+    private PatientEntity patientEntity;
 }
