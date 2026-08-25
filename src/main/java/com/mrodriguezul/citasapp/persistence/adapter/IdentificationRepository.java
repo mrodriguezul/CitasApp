@@ -1,10 +1,10 @@
 package com.mrodriguezul.citasapp.persistence.adapter;
 
-import com.mrodriguezul.citasapp.domain.model.Identificacion;
+import com.mrodriguezul.citasapp.domain.model.Identification;
 import com.mrodriguezul.citasapp.domain.repository.IIdentificationRepository;
 import com.mrodriguezul.citasapp.persistence.crud.IdentificationCrudRepository;
-import com.mrodriguezul.citasapp.persistence.entity.Identification;
-import com.mrodriguezul.citasapp.persistence.mapper.IdentificacionMapper;
+import com.mrodriguezul.citasapp.persistence.entity.IdentificationEntity;
+import com.mrodriguezul.citasapp.persistence.mapper.IdentificationPersistenceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -15,23 +15,23 @@ import java.util.Optional;
 public class IdentificationRepository implements IIdentificationRepository {
 
     private IdentificationCrudRepository identificationCrudRepository;
-    private IdentificacionMapper mapper;
+    private IdentificationPersistenceMapper mapper;
 
     @Autowired
-    public IdentificationRepository(IdentificationCrudRepository identificationCrudRepository, IdentificacionMapper mapper) {
+    public IdentificationRepository(IdentificationCrudRepository identificationCrudRepository, IdentificationPersistenceMapper mapper) {
         this.identificationCrudRepository = identificationCrudRepository;
         this.mapper = mapper;
     }
 
     @Override
-    public List<Identificacion> findAll() {
-        List<Identification> lstIdentifications = (List<Identification>) identificationCrudRepository.findAll();
+    public List<Identification> findAll() {
+        List<IdentificationEntity> lstIdentifications = (List<IdentificationEntity>) identificationCrudRepository.findAll();
         return mapper.toIdentificaciones(lstIdentifications);
     }
 
     @Override
-    public Optional<Identificacion> findById(Long idIdentificacion) {
-        Optional<Identification> identification = identificationCrudRepository.findById(idIdentificacion);
+    public Optional<Identification> findById(Long idIdentificacion) {
+        Optional<IdentificationEntity> identification = identificationCrudRepository.findById(idIdentificacion);
         return identification.map(mapper::toIdentificacion);
     }
 
@@ -41,10 +41,10 @@ public class IdentificationRepository implements IIdentificationRepository {
     }
 
     @Override
-    public Identificacion save(Identificacion identificacion) {
-        Identification identification = mapper.toIdentification(identificacion);
-        //identificationCrudRepository.existsById(identification.getId());
-        return mapper.toIdentificacion(identificationCrudRepository.save(identification));
+    public Identification save(Identification identification) {
+        IdentificationEntity identificationEntity = mapper.toIdentification(identification);
+        //identificationCrudRepository.existsById(identificationEntity.getId());
+        return mapper.toIdentificacion(identificationCrudRepository.save(identificationEntity));
     }
 
     @Override

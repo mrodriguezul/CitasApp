@@ -1,12 +1,12 @@
 package com.mrodriguezul.citasapp.domain.model;
 
-public class Paciente extends Persona{
+public class Patient extends Person {
 
-    public Paciente(Long id) {
+    public Patient(Long id) {
         super(id);
     }
 
-    public Paciente() {
+    public Patient() {
         super();
     }
 }

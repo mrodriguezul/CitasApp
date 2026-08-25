@@ -2,14 +2,14 @@ package com.mrodriguezul.citasapp.domain.model;
 
 import java.time.LocalDateTime;
 
-public class Rol {
+public class Role {
     private String nombre;
     private LocalDateTime fechaAsignacion;
 
-    public Rol() {
+    public Role() {
     }
 
-    public Rol(String nombre, LocalDateTime fechaAsignacion) {
+    public Role(String nombre, LocalDateTime fechaAsignacion) {
         this.nombre = nombre;
         this.fechaAsignacion = fechaAsignacion;
     }
@@ -32,7 +32,7 @@ public class Rol {
 
     @Override
     public String toString() {
-        return "Rol{" +
+        return "Role{" +
                 "nombre='" + nombre + '\'' +
                 ", fechaAsignacion=" + fechaAsignacion +
                 '}';

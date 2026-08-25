@@ -3,8 +3,9 @@ package com.mrodriguezul.citasapp.persistence.adapter;
 import com.mrodriguezul.citasapp.domain.model.Doctor;
 import com.mrodriguezul.citasapp.persistence.crud.DoctorCrudRepository;
 import com.mrodriguezul.citasapp.persistence.crud.PersonCrudRepository;
-import com.mrodriguezul.citasapp.persistence.entity.Person;
-import com.mrodriguezul.citasapp.persistence.mapper.DoctorMapper;
+import com.mrodriguezul.citasapp.persistence.entity.DoctorEntity;
+import com.mrodriguezul.citasapp.persistence.entity.PersonEntity;
+import com.mrodriguezul.citasapp.persistence.mapper.DoctorPersistenceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class DoctorRepository implements com.mrodriguezul.citasapp.domain.repository.DoctorRepository {
+public class IDoctorRepository implements com.mrodriguezul.citasapp.domain.repository.IDoctorRepository {
     @Autowired
     private DoctorCrudRepository doctorCrudRepository;
 
@@ -21,11 +22,11 @@ public class DoctorRepository implements com.mrodriguezul.citasapp.domain.reposi
     private PersonCrudRepository personCrudRepository;
 
     @Autowired
-    private DoctorMapper mapper;
+    private DoctorPersistenceMapper mapper;
 
     @Override
     public List<Doctor> findAll() {
-        return ((List<com.mrodriguezul.citasapp.persistence.entity.Doctor>) doctorCrudRepository.findAllByOrderByIdAsc())
+        return ((List<DoctorEntity>) doctorCrudRepository.findAllByOrderByIdAsc())
                 .stream()
                 .map(mapper::toDoctor)
                 .toList();
@@ -33,7 +34,7 @@ public class DoctorRepository implements com.mrodriguezul.citasapp.domain.reposi
 
     @Override
     public List<Doctor> findAllByNameOrSurname(String names, String surnames) {
-        return ((List<com.mrodriguezul.citasapp.persistence.entity.Doctor>) doctorCrudRepository.findAllByPerson_namesContainingIgnoreCaseOrPerson_surnamesContainingIgnoreCaseOrderByIdAsc(names, surnames))
+        return ((List<DoctorEntity>) doctorCrudRepository.findAllByPersonEntity_namesContainingIgnoreCaseOrPersonEntity_surnamesContainingIgnoreCaseOrderByIdAsc(names, surnames))
                 .stream()
                 .map(mapper::toDoctor)
                 .toList();
@@ -41,7 +42,7 @@ public class DoctorRepository implements com.mrodriguezul.citasapp.domain.reposi
 
     @Override
     public List<Doctor> findAllBySpeciality(Long specialityId) {
-        return ((List<com.mrodriguezul.citasapp.persistence.entity.Doctor>) doctorCrudRepository.findAllBySpeciality_IdOrderByIdAsc(specialityId))
+        return ((List<DoctorEntity>) doctorCrudRepository.findAllBySpecialityEntity_IdOrderByIdAsc(specialityId))
                 .stream()
                 .map(mapper::toDoctor)
                 .toList();
@@ -49,7 +50,7 @@ public class DoctorRepository implements com.mrodriguezul.citasapp.domain.reposi
 
     @Override
     public Optional<Doctor> findByIdentificationNumber(String identificationNumber) {
-        return doctorCrudRepository.findByPerson_IdentificationNumberOrderByIdAsc(identificationNumber)
+        return doctorCrudRepository.findByPersonEntity_IdentificationNumberOrderByIdAsc(identificationNumber)
                 .map(mapper::toDoctor);
     }
 
@@ -62,20 +63,20 @@ public class DoctorRepository implements com.mrodriguezul.citasapp.domain.reposi
 
     @Override
     public Optional<Doctor> findByIdentificationTypeAndIdentificationNumber(Long identificationId, String identificationNumber) {
-        return doctorCrudRepository.findByPerson_IdentificationIdAndPerson_IdentificationNumber(identificationId, identificationNumber)
+        return doctorCrudRepository.findByPersonEntity_IdentificationEntityIdAndPersonEntity_IdentificationNumber(identificationId, identificationNumber)
                 .map(mapper::toDoctor);
     }
 
     @Override
     @Transactional
     public Doctor save(Doctor doctor) {
-        com.mrodriguezul.citasapp.persistence.entity.Doctor doctorEntity = mapper.toDoctorEntity(doctor);
+        DoctorEntity doctorEntity = mapper.toDoctorEntity(doctor);
 
-        Person savedPerson = personCrudRepository.save(doctorEntity.getPerson());
-        doctorEntity.setPerson(savedPerson);
+        PersonEntity savedPersonEntity = personCrudRepository.save(doctorEntity.getPersonEntity());
+        doctorEntity.setPersonEntity(savedPersonEntity);
 
-        com.mrodriguezul.citasapp.persistence.entity.Doctor savedDoctor = doctorCrudRepository.save(doctorEntity);
-        return mapper.toDoctor(savedDoctor);
+        DoctorEntity savedDoctorEntity = doctorCrudRepository.save(doctorEntity);
+        return mapper.toDoctor(savedDoctorEntity);
     }
 
     @Override
@@ -89,24 +90,24 @@ public class DoctorRepository implements com.mrodriguezul.citasapp.domain.reposi
     }
 
 
-    /*public DoctorRepository(DoctorCrudRepository doctorCrudRepository) {
+    /*public IDoctorRepository(DoctorCrudRepository doctorCrudRepository) {
         this.doctorCrudRepository = doctorCrudRepository;
     }
 
-    List<Doctor> findBySpecialityIdOrderBySpecialityId(Long id) {
+    List<DoctorEntity> findBySpecialityIdOrderBySpecialityId(Long id) {
         return doctorCrudRepository.findBySpeciality_IdOrderBySpeciality_Id(id);
     }
 
-    Doctor findByPersonId(Long personId) {
+    DoctorEntity findByPersonId(Long personId) {
         return doctorCrudRepository.findByPerson_Id(personId).orElse(null);
     }
 
-    Doctor findByPersonIdAndPersonIdentificationNumber(Long personId, String identificationNumber) {
+    DoctorEntity findByPersonIdAndPersonIdentificationNumber(Long personId, String identificationNumber) {
         return doctorCrudRepository.findByPerson_IdAndPerson_IdentificationNumber(personId, identificationNumber)
                 .orElse(null);
     }
 
-    Doctor findByPersonIdentificationIdAndPersonIdentificationNumber(Long identificationId, String identificationNumber) {
+    DoctorEntity findByPersonIdentificationIdAndPersonIdentificationNumber(Long identificationId, String identificationNumber) {
         return doctorCrudRepository.findByPerson_IdentificationIdAndPerson_IdentificationNumber(identificationId, identificationNumber)
                 .orElse(null);
     }*/

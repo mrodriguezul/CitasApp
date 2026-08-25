@@ -1,15 +1,15 @@
 package com.mrodriguezul.citasapp.domain.model;
 
-public class Especialidad {
+public class Speciality {
     private Long id;
     private String nombre;
 
-    public Especialidad(Long id, String nombre) {
+    public Speciality(Long id, String nombre) {
         this.id = id;
         this.nombre = nombre;
     }
 
-    public Especialidad() {
+    public Speciality() {
     }
 
     public Long getId() {

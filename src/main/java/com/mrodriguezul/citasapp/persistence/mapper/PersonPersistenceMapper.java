@@ -2,10 +2,10 @@ package com.mrodriguezul.citasapp.persistence.mapper;
 
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring", uses = {IdentificacionMapper.class})
-public interface PersonaMapper {
+@Mapper(componentModel = "spring", uses = {IdentificationPersistenceMapper.class})
+public interface PersonPersistenceMapper {
     // Define mapping methods here if needed
-    // For example, you can map between domain and entity classes related to Persona
+    // For example, you can map between domain and entity classes related to Person
      /*@Mappings({
          @Mapping(source = "id", target = "idPersona"),
          @Mapping(source = "identification", target = "identificacion"),
@@ -16,15 +16,15 @@ public interface PersonaMapper {
          @Mapping(source = "email", target = "email"),
          @Mapping(source = "phoneNumber", target = "numeroTelefono")
      })
-     Persona toPersona(Person person);
-     List<Persona> toPersonas(List<Person> persons);
+     Person toPersona(PersonEntity person);
+     List<Person> toPersonas(List<PersonEntity> persons);
 
      @InheritInverseConfiguration
      @Mappings({
          @Mapping(target = "doctor", ignore = true),
          @Mapping(target = "patient", ignore = true)
      })
-     Person toPerson(Persona persona);*/
+     PersonEntity toPerson(Person persona);*/
 
 
 }

@@ -1,6 +1,6 @@
 package com.mrodriguezul.citasapp.domain.service;
 
-import com.mrodriguezul.citasapp.domain.model.Paciente;
+import com.mrodriguezul.citasapp.domain.model.Patient;
 import com.mrodriguezul.citasapp.persistence.adapter.PatienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,11 +16,11 @@ public class PacienteService {
         this.pacienteRepository = pacienteRepository;
     }
 
-    public Page<Paciente> getAll(int page, int size) {
+    public Page<Patient> getAll(int page, int size) {
         return pacienteRepository.findAll(page, size);
     }
 
-    public Page<Paciente> getAllByIdentificationId(Long personIdentificationId, int page, int size, String sortBy, String sortDir) {
+    public Page<Patient> getAllByIdentificationId(Long personIdentificationId, int page, int size, String sortBy, String sortDir) {
         return pacienteRepository.findAllByIdentificationId(personIdentificationId, page, size, sortBy, sortDir);
     }
 }

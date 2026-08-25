@@ -1,23 +1,23 @@
 package com.mrodriguezul.citasapp.domain.model;
 
-public class Doctor extends Persona {
-    private Especialidad especialidad;
+public class Doctor extends Person {
+    private Speciality speciality;
 
-    public Doctor(Long id, Especialidad especialidad) {
+    public Doctor(Long id, Speciality speciality) {
         super(id);
-        this.especialidad = especialidad;
+        this.speciality = speciality;
     }
 
     public Doctor() {
         super();
     }
 
-    public void setEspecialidad(Especialidad especialidad) {
-        this.especialidad = especialidad;
+    public void setEspecialidad(Speciality speciality) {
+        this.speciality = speciality;
     }
 
-    public Especialidad getEspecialidad() {
-        return especialidad;
+    public Speciality getEspecialidad() {
+        return speciality;
     }
 
 }

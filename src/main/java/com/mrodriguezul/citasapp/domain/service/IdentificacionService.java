@@ -1,6 +1,6 @@
 package com.mrodriguezul.citasapp.domain.service;
 
-import com.mrodriguezul.citasapp.domain.model.Identificacion;
+import com.mrodriguezul.citasapp.domain.model.Identification;
 import com.mrodriguezul.citasapp.domain.repository.IIdentificationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,11 +14,11 @@ public class IdentificacionService {
     @Autowired
     private IIdentificationRepository IIdentificationRepository;
 
-    public List<Identificacion> getAll(){
+    public List<Identification> getAll(){
         return IIdentificationRepository.findAll();
     }
 
-    public Optional<Identificacion> getIdentificacion(Long idIdentificacion){
+    public Optional<Identification> getIdentificacion(Long idIdentificacion){
         return IIdentificationRepository.findById(idIdentificacion);
     }
 
@@ -26,8 +26,8 @@ public class IdentificacionService {
         return IIdentificationRepository.existsById(idIdentificacion);
     }
 
-    public Identificacion save(Identificacion identificacion){
-        return IIdentificationRepository.save(identificacion);
+    public Identification save(Identification identification){
+        return IIdentificationRepository.save(identification);
     }
 
     public boolean delete(Long idIdentificacion){

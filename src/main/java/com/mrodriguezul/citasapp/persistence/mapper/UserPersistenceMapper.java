@@ -1,7 +1,7 @@
 package com.mrodriguezul.citasapp.persistence.mapper;
 
-import com.mrodriguezul.citasapp.domain.model.Rol;
-import com.mrodriguezul.citasapp.domain.model.Usuario;
+import com.mrodriguezul.citasapp.domain.model.Role;
+import com.mrodriguezul.citasapp.domain.model.User;
 import com.mrodriguezul.citasapp.persistence.entity.UserEntity;
 import com.mrodriguezul.citasapp.persistence.entity.UserRoleEntity;
 import org.mapstruct.InheritInverseConfiguration;
@@ -13,21 +13,21 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
-public interface UsuarioMapper {
+public interface UserPersistenceMapper {
 
     @Mapping(target = "roles", source = "roles", qualifiedByName = "mapRolesToDomain")
-    Usuario toUsuario(UserEntity userEntity);
+    User toUsuario(UserEntity userEntity);
 
-    List<Usuario> toUsuarios(List<UserEntity> userEntities);
+    List<User> toUsuarios(List<UserEntity> userEntities);
 
     @InheritInverseConfiguration
     @Mapping(target = "roles", ignore = true)
-    UserEntity toUserEntity(Usuario usuario);
+    UserEntity toUserEntity(User user);
 
-    List<UserEntity> toUserEntities(List<Usuario> usuarios);
+    List<UserEntity> toUserEntities(List<User> users);
 
     @Named("mapRolesToDomain")
-    default List<Rol> mapRolesToDomain(List<UserRoleEntity> roleEntities) {
+    default List<Role> mapRolesToDomain(List<UserRoleEntity> roleEntities) {
         if (roleEntities == null) {
             return null;
         }
@@ -36,13 +36,13 @@ public interface UsuarioMapper {
                 .collect(Collectors.toList());
     }
 
-    default Rol mapSingleRole(UserRoleEntity roleEntity) {
+    default Role mapSingleRole(UserRoleEntity roleEntity) {
         if (roleEntity == null) {
             return null;
         }
-        Rol rol = new Rol();
-        rol.setNombre(roleEntity.getRole());
-        rol.setFechaAsignacion(roleEntity.getGrantedDate());
-        return rol;
+        Role role = new Role();
+        role.setNombre(roleEntity.getRole());
+        role.setFechaAsignacion(roleEntity.getGrantedDate());
+        return role;
     }
 }

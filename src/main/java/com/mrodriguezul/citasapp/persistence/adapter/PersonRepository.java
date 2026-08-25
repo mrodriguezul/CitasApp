@@ -1,7 +1,7 @@
 package com.mrodriguezul.citasapp.persistence.adapter;
 
 import com.mrodriguezul.citasapp.persistence.crud.PersonCrudRepository;
-import com.mrodriguezul.citasapp.persistence.entity.Person;
+import com.mrodriguezul.citasapp.persistence.entity.PersonEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,11 +13,11 @@ public class PersonRepository {
     public PersonRepository(PersonCrudRepository personCrudRepository) {
         this.personCrudRepository = personCrudRepository;
     }
-    public List<Person> findByIdentificationIdOrderByIdentificationIdAsc(Long identificationId) {
-        return personCrudRepository.findByIdentification_IdOrderByIdentification_IdAsc(identificationId);
+    public List<PersonEntity> findByIdentificationIdOrderByIdentificationIdAsc(Long identificationId) {
+        return personCrudRepository.findByIdentificationEntity_IdOrderByIdentificationEntity_IdAsc(identificationId);
     }
-    public Person findPersonByIdentificationIdAndIdentificationNumber(Long identificationId, String identificationNumber) {
-        return personCrudRepository.findPersonByIdentification_IdAndIdentificationNumber(identificationId, identificationNumber)
+    public PersonEntity findPersonByIdentificationIdAndIdentificationNumber(Long identificationId, String identificationNumber) {
+        return personCrudRepository.findPersonByIdentificationEntity_IdAndIdentificationNumber(identificationId, identificationNumber)
                 .orElse(null);
     }
 

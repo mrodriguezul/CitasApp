@@ -2,18 +2,18 @@ package com.mrodriguezul.citasapp.domain.model;
 
 import java.util.List;
 
-public class Usuario {
+public class User {
     private String username;
     private String password;
     private String email;
     private Boolean locked;
     private Boolean disabled;
-    private List<Rol> roles;
+    private List<Role> roles;
 
-    public Usuario() {
+    public User() {
     }
 
-    public Usuario(String username) {
+    public User(String username) {
         this.username = username;
     }
 
@@ -57,11 +57,11 @@ public class Usuario {
         this.username = username;
     }
 
-    public List<Rol> getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Rol> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 }

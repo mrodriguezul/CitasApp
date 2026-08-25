@@ -12,21 +12,17 @@ import java.util.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "doctor")
-public class Doctor implements Serializable {
+@Table(name = "patient")
+public class PatientEntity implements Serializable {
     @Id
     private Long id;
 
-    @OneToOne(fetch =  FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @MapsId
     @JoinColumn(name = "id", nullable = false)
-    private Person person;
+    private PersonEntity personEntity;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "speciality_id", nullable = false)
-    private Speciality speciality;
-
-    @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "patientEntity", fetch = FetchType.LAZY)
     @OrderBy("appointmentDate DESC")
-    private List<Appointment> appointments;
+    private List<AppointmentEntity> appointments;
 }

@@ -2,10 +2,10 @@ package com.mrodriguezul.citasapp.domain.model;
 
 import java.util.Date;
 
-public abstract class Persona {
+public abstract class Person {
 
     private Long id;
-    private Identificacion identificacion;
+    private Identification identification;
     private String numeroIdentificacion;
     private String nombres;
     private String apellidos;
@@ -13,11 +13,11 @@ public abstract class Persona {
     private String email;
     private String numeroTelefono;
 
-    public Persona(Long id) {
+    public Person(Long id) {
         this.id = id;
     }
 
-    public Persona() {
+    public Person() {
     }
 
     public Long getId() {
@@ -28,12 +28,12 @@ public abstract class Persona {
         this.id = id;
     }
 
-    public Identificacion getIdentificacion() {
-        return identificacion;
+    public Identification getIdentificacion() {
+        return identification;
     }
 
-    public void setIdentificacion(Identificacion identificacion) {
-        this.identificacion = identificacion;
+    public void setIdentificacion(Identification identification) {
+        this.identification = identification;
     }
 
     public String getNumeroIdentificacion() {

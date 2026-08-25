@@ -16,7 +16,7 @@ import java.util.*;
 @NoArgsConstructor
 @Table(name = "person")
 @EntityListeners(AuditPersonListener.class)
-public class Person extends AuditEntity implements Serializable {
+public class PersonEntity extends AuditEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -41,17 +41,17 @@ public class Person extends AuditEntity implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "identification_id", nullable = false)
-    private Identification identification;
+    private IdentificationEntity identificationEntity;
 
-    @OneToOne(mappedBy = "person")
-    private Doctor doctor;
+    @OneToOne(mappedBy = "personEntity")
+    private DoctorEntity doctorEntity;
 
-    @OneToOne(mappedBy = "person")
-    private Patient patient;
+    @OneToOne(mappedBy = "personEntity")
+    private PatientEntity patientEntity;
 
     @Override
     public String toString() {
-        return "Person{" +
+        return "PersonEntity{" +
                 "id=" + id +
                 ", identificationNumber='" + identificationNumber + '\'' +
                 ", names='" + names + '\'' +
@@ -59,7 +59,7 @@ public class Person extends AuditEntity implements Serializable {
                 ", dateOfBirth=" + dateOfBirth +
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", identification=" + (identification != null ? identification.getId() : null) +
+                ", identificationEntity=" + (identificationEntity != null ? identificationEntity.getId() : null) +
                 '}';
     }
 }

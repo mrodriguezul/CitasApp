@@ -1,6 +1,6 @@
 package com.mrodriguezul.citasapp.domain.model;
 
-public class Identificacion {
+public class Identification {
     private Long idIdentificacion;
     private String nombre;
     private String descripcion;

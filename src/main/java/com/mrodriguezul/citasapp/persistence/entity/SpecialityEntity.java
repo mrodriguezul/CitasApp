@@ -12,18 +12,15 @@ import java.util.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "identification")
-public class Identification implements Serializable {
+@Table(name = "speciality")
+public class SpecialityEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 30)
+    @Column(nullable = false, length = 40)
     private String name;
 
-    @Column(nullable = false, length = 40)
-    private String description;
-
-    @OneToMany(mappedBy = "identification", fetch = FetchType.LAZY)
-    private List<Person> persons;
+    @OneToMany(mappedBy = "specialityEntity", fetch = FetchType.LAZY)
+    private List<DoctorEntity> doctors;
 }

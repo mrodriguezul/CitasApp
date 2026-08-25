@@ -1,7 +1,7 @@
 package com.mrodriguezul.citasapp.domain.service;
 
 import com.mrodriguezul.citasapp.config.JwtConfig;
-import com.mrodriguezul.citasapp.domain.model.Usuario;
+import com.mrodriguezul.citasapp.domain.model.User;
 import com.mrodriguezul.citasapp.persistence.adapter.UserRepository;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -48,23 +47,23 @@ public class UserSecurityService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Usuario usuario = userRepository.findByUsername(username)
+        User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
 
-        String[] roles = usuario.getRoles() != null && !usuario.getRoles().isEmpty() ?
-                usuario.getRoles().stream()
+        String[] roles = user.getRoles() != null && !user.getRoles().isEmpty() ?
+                user.getRoles().stream()
                         .map(rol -> rol.getNombre())
                         .toArray(String[]::new) :
                 new String[]{"NO-ROL"};
 
-        return User.builder()
-                .username(usuario.getUsername())
-                .password(usuario.getPassword())
+        return org.springframework.security.core.userdetails.User.builder()
+                .username(user.getUsername())
+                .password(user.getPassword())
                 //.roles(roles)
                 .authorities(this.getGrantedAuthorities(roles))
-                .accountLocked(usuario.getLocked())
-                .disabled(usuario.getDisabled())
+                .accountLocked(user.getLocked())
+                .disabled(user.getDisabled())
                 .build();
     }
 
@@ -86,13 +85,13 @@ public class UserSecurityService implements UserDetailsService {
         return authorities;
     }
 
-    public String loginUser(Usuario usuario) {
+    public String loginUser(User user) {
         AuthenticationManager authenticationManager = authenticationManagerProvider.getIfAvailable();
-        UsernamePasswordAuthenticationToken login = new UsernamePasswordAuthenticationToken(usuario.getUsername(), usuario.getPassword());
+        UsernamePasswordAuthenticationToken login = new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword());
         Authentication authentication = authenticationManager.authenticate(login);
         //System.out.println(authentication.isAuthenticated());
         //System.out.println(authentication.getPrincipal());
-        String token = jwtConfig.createToken(usuario.getUsername());
+        String token = jwtConfig.createToken(user.getUsername());
         System.out.println("Generated Token: " + token);
         return token;
     }

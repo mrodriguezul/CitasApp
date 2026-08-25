@@ -1,7 +1,7 @@
 package com.mrodriguezul.citasapp.persistence.mapper;
 
-import com.mrodriguezul.citasapp.domain.model.Identificacion;
-import com.mrodriguezul.citasapp.persistence.entity.Identification;
+import com.mrodriguezul.citasapp.domain.model.Identification;
+import com.mrodriguezul.citasapp.persistence.entity.IdentificationEntity;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -10,18 +10,18 @@ import org.mapstruct.Mappings;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-public interface IdentificacionMapper {
+public interface IdentificationPersistenceMapper {
     @Mappings({
             @Mapping(source = "id", target = "idIdentificacion"),
             @Mapping(source = "name", target = "nombre"),
             @Mapping(source = "description", target = "descripcion")
     })
-    Identificacion toIdentificacion(Identification identification);
+    Identification toIdentificacion(IdentificationEntity identificationEntity);
 
     @InheritInverseConfiguration
     @Mapping(target = "persons", ignore = true)
-    Identification toIdentification(Identificacion identificacion);
+    IdentificationEntity toIdentification(Identification identification);
 
-    List<Identificacion> toIdentificaciones(List<Identification> identifications);
+    List<Identification> toIdentificaciones(List<IdentificationEntity> identificationEntities);
 }
 

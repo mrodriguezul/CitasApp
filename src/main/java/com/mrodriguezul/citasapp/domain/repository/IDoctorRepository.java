@@ -4,7 +4,7 @@ import com.mrodriguezul.citasapp.domain.model.Doctor;
 import java.util.List;
 import java.util.Optional;
 
-public interface DoctorRepository {
+public interface IDoctorRepository {
     List<Doctor> findAll();
     List<Doctor> findAllByNameOrSurname(String names, String surnames);
     List<Doctor> findAllBySpeciality(Long specialityId);

@@ -1,6 +1,6 @@
 package com.mrodriguezul.citasapp.web.controller;
 
-import com.mrodriguezul.citasapp.domain.model.Paciente;
+import com.mrodriguezul.citasapp.domain.model.Patient;
 import com.mrodriguezul.citasapp.domain.service.PacienteService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -13,14 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
-@Tag(name = "Paciente", description = "Operacines relacionadas con pacientes 👴🧓")
+@Tag(name = "Patient", description = "Operacines relacionadas con pacientes 👴🧓")
 @RestController
 @RequestMapping("/paciente")
-public class PacienteController {
+public class PatientController {
     private final PacienteService pacienteService;
 
     @Autowired
-    public PacienteController(PacienteService pacienteService) {
+    public PatientController(PacienteService pacienteService) {
         this.pacienteService = pacienteService;
     }
 
@@ -34,7 +34,7 @@ public class PacienteController {
             @Parameter(name = "size", description = "Cantidad de elementos de página", required = false, example = "10")
     })
     @GetMapping
-    public Page<Paciente> getAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
+    public Page<Patient> getAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
         return pacienteService.getAll(page, size);
     }
 
@@ -51,7 +51,7 @@ public class PacienteController {
             @Parameter(name = "sortDir", description = "Dirección de ordenamiento (ASC/DESC)", required = false, example = "ASC")
     })
     @GetMapping("/by-identification/{personIdentificationId}")
-    public Page<Paciente> getAllByIdentificationId(
+    public Page<Patient> getAllByIdentificationId(
             @PathVariable Long personIdentificationId,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
