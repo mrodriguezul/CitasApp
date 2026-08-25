@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import java.util.List;
 
-@Tag(name = "Identificación", description = "Operaciones relacionadas con identificaciones")
+@Tag(name = "Identification", description = "Operations - types of identification")
 @RestController
 @RequestMapping("/identificacion")
 public class IdentificationController {
@@ -32,10 +32,10 @@ public class IdentificationController {
         this.identificationService = identificationService;
     }
 
-    @Operation(summary = "Listar todas las identificaciones", description = "Obtiene una lista de todas las identificaciones")
+    @Operation(summary = "List all types of identification", description = "It retrieves a list of all types of identification")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Listado exitoso"),
-        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+        @ApiResponse(responseCode = "200", description = "Successful list"),
+        @ApiResponse(responseCode = "500", description = "Internal Server Error")
     })
     @GetMapping("")
     ResponseEntity<List<Identification>> listAll(){
@@ -49,15 +49,15 @@ public class IdentificationController {
         }
     }
 
-    @Operation(summary = "Obtener una identificación por ID", description = "Obtiene una identificación específica por su ID")
+    @Operation(summary = "Obtain an identification type by ID", description = "Obtain a specific identification by ID.")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Identificación encontrada"),
-        @ApiResponse(responseCode = "404", description = "Identificación no encontrada"),
-        @ApiResponse(responseCode = "400", description = "ID inválido"),
-        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+        @ApiResponse(responseCode = "200", description = "Identification found"),
+        @ApiResponse(responseCode = "404", description = "Identification not found"),
+        @ApiResponse(responseCode = "400", description = "Invalid ID"),
+        @ApiResponse(responseCode = "500", description = "Internal Server Error")
     })
     @Parameters(value = {
-            @Parameter(name = "idIdentificacion", description = "ID de la identificación a buscar", required = true, example = "2")
+            @Parameter(name = "idIdentificacion", description = "ID of the identification to search for", required = true, example = "2")
     })
     @GetMapping("/{idIdentificacion}")
     public ResponseEntity<Identification> getById(@PathVariable("idIdentificacion") Long idIdentificacion){
@@ -82,12 +82,12 @@ public class IdentificationController {
         }
     }
 
-    @Operation(summary = "Registrar una nueva identificación", description = "Guarda la información de una nueva identificación")
+    @Operation(summary = "Register a new identification type", description = "Save the information for a new identification type")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "201", description = "Identificación creada exitosamente"),
-        @ApiResponse(responseCode = "400", description = "Datos inválidos"),
-        @ApiResponse(responseCode = "409", description = "Identificación ya existe"),
-        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+        @ApiResponse(responseCode = "201", description = "Identification successfully created"),
+        @ApiResponse(responseCode = "400", description = "Invalid data"),
+        @ApiResponse(responseCode = "409", description = "Identification already exists"),
+        @ApiResponse(responseCode = "500", description = "Internal Server Error")
     })
     @PostMapping()
     public ResponseEntity<Identification> save(@Valid @RequestBody Identification identification){
@@ -106,12 +106,12 @@ public class IdentificationController {
         }
     }
 
-    @Operation(summary = "Actualizar identificación", description = "Actualiza la información de identificación")
+    @Operation(summary = "Update identification type", description = "Update identification type")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Identificación actualizada exitosamente"),
-            @ApiResponse(responseCode = "400", description = "Datos inválidos"),
-            @ApiResponse(responseCode = "404", description = "Identificación no encontrada"),
-            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+            @ApiResponse(responseCode = "200", description = "Identification successfully updated"),
+            @ApiResponse(responseCode = "400", description = "Invalid data"),
+            @ApiResponse(responseCode = "404", description = "Identification not found"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error")
     })
     @PutMapping()
     public ResponseEntity<Identification> update(@Valid @RequestBody Identification identification){
@@ -130,12 +130,12 @@ public class IdentificationController {
         }
     }
 
-    @Operation(summary = "Eliminar una identificación por ID", description = "Elimina la identificación especificada por su ID")
+    @Operation(summary = "Delete an identification type", description = "Removes the specific identification type by its ID")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "204", description = "Identificación eliminada exitosamente"),
-        @ApiResponse(responseCode = "404", description = "Identificación no encontrada"),
-        @ApiResponse(responseCode = "400", description = "ID inválido"),
-        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+        @ApiResponse(responseCode = "204", description = "Identification not found"),
+        @ApiResponse(responseCode = "404", description = "Identification not found"),
+        @ApiResponse(responseCode = "400", description = "Invalid ID"),
+        @ApiResponse(responseCode = "500", description = "Internal Server Error")
     })
     @DeleteMapping("/{idIdentificacion}")
     public ResponseEntity<Void> delete(@PathVariable("idIdentificacion") Long idIdentificacion){

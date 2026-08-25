@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
-@Tag(name = "Patient", description = "Operacines relacionadas con pacientes 👴🧓")
+@Tag(name = "Patient", description = "Operations - patients 👴🧓")
 @RestController
 @RequestMapping("/paciente")
 public class PatientController {
@@ -24,31 +24,31 @@ public class PatientController {
         this.patientService = patientService;
     }
 
-    @Operation(summary = "Obtener todos los pacientes", description = "Retorna una lista paginada de pacientes")
+    @Operation(summary = "Get all patients", description = "Returns a paginated list of patients")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Pacientes encontrados"),
-            @ApiResponse(responseCode = "404", description = "No se encontraron pacientes")
+            @ApiResponse(responseCode = "200", description = "Patients found"),
+            @ApiResponse(responseCode = "404", description = "No patients were found")
     })
     @Parameters(value = {
-            @Parameter(name = "page", description = "Número de página", required = false, example = "0"),
-            @Parameter(name = "size", description = "Cantidad de elementos de página", required = false, example = "10")
+            @Parameter(name = "page", description = "Page number", required = false, example = "0"),
+            @Parameter(name = "size", description = "Number of page elements", required = false, example = "10")
     })
     @GetMapping
     public Page<Patient> getAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
         return patientService.getAll(page, size);
     }
 
-    @Operation(summary = "Obtener pacientes por identificación", description = "Retorna una lista paginada de pacientes filtrados por identificación")
+    @Operation(summary = "Obtain patients by identification", description = "Returns a paginated list of patients filtered by ID")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Pacientes encontrados"),
-            @ApiResponse(responseCode = "404", description = "No se encontraron pacientes")
+            @ApiResponse(responseCode = "200", description = "Patients found"),
+            @ApiResponse(responseCode = "404", description = "No patients were found")
     })
     @Parameters(value = {
             @Parameter(name = "personIdentificationId", description = "ID de la identificación de la persona", required = true, example = "1", in = ParameterIn.PATH),
-            @Parameter(name = "page", description = "Número de página", required = false, example = "0"),
-            @Parameter(name = "size", description = "Cantidad de elementos de página", required = false, example = "10"),
-            @Parameter(name = "sortBy", description = "Campo para ordenar", required = false, example = "id"),
-            @Parameter(name = "sortDir", description = "Dirección de ordenamiento (ASC/DESC)", required = false, example = "ASC")
+            @Parameter(name = "page", description = "Page number", required = false, example = "0"),
+            @Parameter(name = "size", description = "Number of page elements", required = false, example = "10"),
+            @Parameter(name = "sortBy", description = "Sort field", required = false, example = "id"),
+            @Parameter(name = "sortDir", description = "Directorate of ordering (ASC/DESC)", required = false, example = "ASC")
     })
     @GetMapping("/by-identification/{personIdentificationId}")
     public Page<Patient> getAllByIdentificationId(
