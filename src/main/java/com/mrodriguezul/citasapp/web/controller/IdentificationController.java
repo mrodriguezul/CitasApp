@@ -1,7 +1,7 @@
 package com.mrodriguezul.citasapp.web.controller;
 
 import com.mrodriguezul.citasapp.domain.model.Identification;
-import com.mrodriguezul.citasapp.domain.service.IdentificacionService;
+import com.mrodriguezul.citasapp.domain.service.IdentificationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -25,11 +25,11 @@ import java.util.List;
 public class IdentificationController {
 
     private static final Logger logger = LoggerFactory.getLogger(IdentificationController.class);
-    private final IdentificacionService identificacionService;
+    private final IdentificationService identificationService;
 
     @Autowired
-    public IdentificationController(IdentificacionService identificacionService) {
-        this.identificacionService = identificacionService;
+    public IdentificationController(IdentificationService identificationService) {
+        this.identificationService = identificationService;
     }
 
     @Operation(summary = "Listar todas las identificaciones", description = "Obtiene una lista de todas las identificaciones")
@@ -40,7 +40,7 @@ public class IdentificationController {
     @GetMapping("")
     ResponseEntity<List<Identification>> listAll(){
         try {
-            List<Identification> identificaciones = identificacionService.getAll();
+            List<Identification> identificaciones = identificationService.getAll();
             logger.info("Consulta exitosa, se encontraron {} identificaciones", identificaciones.size());
             return new ResponseEntity<>(identificaciones, HttpStatus.OK);
         } catch (Exception e) {
@@ -69,7 +69,7 @@ public class IdentificationController {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
 
-            return identificacionService.getIdentificacion(idIdentificacion).map(identificacion -> {
+            return identificationService.getIdentificacion(idIdentificacion).map(identificacion -> {
                 logger.info("Identificación encontrada con ID: {}", idIdentificacion);
                 return new ResponseEntity<>(identificacion, HttpStatus.OK);
             }).orElseGet(() -> {
@@ -92,8 +92,8 @@ public class IdentificationController {
     @PostMapping()
     public ResponseEntity<Identification> save(@Valid @RequestBody Identification identification){
         try {
-            if(identification.getIdIdentificacion() == null || !identificacionService.existsById(identification.getIdIdentificacion())){
-                Identification identificationGuardada = identificacionService.save(identification);
+            if(identification.getIdIdentificacion() == null || !identificationService.existsById(identification.getIdIdentificacion())){
+                Identification identificationGuardada = identificationService.save(identification);
                 logger.info("Identificación guardada exitosamente con ID: {}", identificationGuardada.getIdIdentificacion());
                 return new ResponseEntity<>(identificationGuardada, HttpStatus.CREATED);
             }else{
@@ -116,8 +116,8 @@ public class IdentificationController {
     @PutMapping()
     public ResponseEntity<Identification> update(@Valid @RequestBody Identification identification){
         try {
-            if(identification.getIdIdentificacion() != null && identificacionService.existsById(identification.getIdIdentificacion())){
-                Identification identificationActualizada = identificacionService.save(identification);
+            if(identification.getIdIdentificacion() != null && identificationService.existsById(identification.getIdIdentificacion())){
+                Identification identificationActualizada = identificationService.save(identification);
                 logger.info("Identificación actualizada exitosamente con ID: {}", identificationActualizada.getIdIdentificacion());
                 return new ResponseEntity<>(identificationActualizada, HttpStatus.OK);
             }else{
@@ -147,7 +147,7 @@ public class IdentificationController {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
 
-            if(identificacionService.delete(idIdentificacion)){
+            if(identificationService.delete(idIdentificacion)){
                 logger.info("Identificación eliminada exitosamente con ID: {}", idIdentificacion);
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             } else {

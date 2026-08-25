@@ -12,13 +12,13 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class PatienteRepository implements IPatientRepository {
+public class PatientRepository implements IPatientRepository {
 
     private final PatientPagSortRepository patientPagSortRepository;
     private final PatientPersistenceMapper patientPersistenceMapper;
 
     @Autowired
-    public PatienteRepository(PatientPagSortRepository patientPagSortRepository, PatientPersistenceMapper patientPersistenceMapper) {
+    public PatientRepository(PatientPagSortRepository patientPagSortRepository, PatientPersistenceMapper patientPersistenceMapper) {
         this.patientPagSortRepository = patientPagSortRepository;
         this.patientPersistenceMapper = patientPersistenceMapper;
     }

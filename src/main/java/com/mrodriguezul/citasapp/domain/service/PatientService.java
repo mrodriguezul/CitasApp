@@ -1,18 +1,18 @@
 package com.mrodriguezul.citasapp.domain.service;
 
 import com.mrodriguezul.citasapp.domain.model.Patient;
-import com.mrodriguezul.citasapp.persistence.adapter.PatienteRepository;
+import com.mrodriguezul.citasapp.persistence.adapter.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PacienteService {
+public class PatientService {
 
-    private final PatienteRepository pacienteRepository;
+    private final PatientRepository pacienteRepository;
 
     @Autowired
-    public PacienteService(PatienteRepository pacienteRepository) {
+    public PatientService(PatientRepository pacienteRepository) {
         this.pacienteRepository = pacienteRepository;
     }
 

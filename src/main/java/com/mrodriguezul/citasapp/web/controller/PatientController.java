@@ -1,7 +1,7 @@
 package com.mrodriguezul.citasapp.web.controller;
 
 import com.mrodriguezul.citasapp.domain.model.Patient;
-import com.mrodriguezul.citasapp.domain.service.PacienteService;
+import com.mrodriguezul.citasapp.domain.service.PatientService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/paciente")
 public class PatientController {
-    private final PacienteService pacienteService;
+    private final PatientService patientService;
 
     @Autowired
-    public PatientController(PacienteService pacienteService) {
-        this.pacienteService = pacienteService;
+    public PatientController(PatientService patientService) {
+        this.patientService = patientService;
     }
 
     @Operation(summary = "Obtener todos los pacientes", description = "Retorna una lista paginada de pacientes")
@@ -35,7 +35,7 @@ public class PatientController {
     })
     @GetMapping
     public Page<Patient> getAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
-        return pacienteService.getAll(page, size);
+        return patientService.getAll(page, size);
     }
 
     @Operation(summary = "Obtener pacientes por identificación", description = "Retorna una lista paginada de pacientes filtrados por identificación")
@@ -57,7 +57,7 @@ public class PatientController {
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "id") String sortBy,
             @RequestParam(defaultValue = "ASC") String sortDir) {
-        return pacienteService.getAllByIdentificationId(personIdentificationId, page, size, sortBy, sortDir);
+        return patientService.getAllByIdentificationId(personIdentificationId, page, size, sortBy, sortDir);
     }
 
 }

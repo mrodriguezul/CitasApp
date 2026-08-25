@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class IDoctorRepository implements com.mrodriguezul.citasapp.domain.repository.IDoctorRepository {
+public class DoctorRepository implements com.mrodriguezul.citasapp.domain.repository.IDoctorRepository {
     @Autowired
     private DoctorCrudRepository doctorCrudRepository;
 
@@ -90,7 +90,7 @@ public class IDoctorRepository implements com.mrodriguezul.citasapp.domain.repos
     }
 
 
-    /*public IDoctorRepository(DoctorCrudRepository doctorCrudRepository) {
+    /*public DoctorRepository(DoctorCrudRepository doctorCrudRepository) {
         this.doctorCrudRepository = doctorCrudRepository;
     }
 
