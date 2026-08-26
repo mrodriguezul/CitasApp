@@ -1,7 +1,7 @@
 package com.mrodriguezul.citasapp.domain.service;
 
-import com.mrodriguezul.citasapp.domain.Doctor;
-import com.mrodriguezul.citasapp.domain.repository.DoctorRepository;
+import com.mrodriguezul.citasapp.domain.model.Doctor;
+import com.mrodriguezul.citasapp.domain.repository.IDoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,44 +12,44 @@ import java.util.Optional;
 public class DoctorService {
 
     @Autowired
-    private DoctorRepository doctorRepository;
+    private IDoctorRepository IDoctorRepository;
 
     public List<Doctor> getAll() {
-        return doctorRepository.findAll();
+        return IDoctorRepository.findAll();
     }
 
     public List<Doctor> getAllByNameOrSurname(String names, String surnames) {
-        return doctorRepository.findAllByNameOrSurname(names, surnames);
+        return IDoctorRepository.findAllByNameOrSurname(names, surnames);
     }
 
     public List<Doctor> getAllBySpeciality(Long specialityId) {
-        return doctorRepository.findAllBySpeciality(specialityId);
+        return IDoctorRepository.findAllBySpeciality(specialityId);
     }
 
     public Optional<Doctor> getAllByIdentificationNumber(String identificationNumber){
-        return doctorRepository.findByIdentificationNumber(identificationNumber);
+        return IDoctorRepository.findByIdentificationNumber(identificationNumber);
     }
 
     public Optional<Doctor> getDoctor(Long id) {
-        return doctorRepository.findById(id);
+        return IDoctorRepository.findById(id);
     }
 
     public Optional<Doctor> getDoctorByIdentificationTypeAndIdentificationNumber(Long identificationId, String identificationNumber){
-        return doctorRepository.findByIdentificationTypeAndIdentificationNumber(identificationId, identificationNumber);
+        return IDoctorRepository.findByIdentificationTypeAndIdentificationNumber(identificationId, identificationNumber);
     }
 
     public Doctor save(Doctor doctor) {
-        return doctorRepository.save(doctor);
+        return IDoctorRepository.save(doctor);
     }
 
     public boolean delete(Long id) {
         return getDoctor(id).map(doctor -> {
-            doctorRepository.delete(id);
+            IDoctorRepository.delete(id);
             return true;
         }).orElse(false);
     }
 
     public boolean existsById(Long id) {
-        return doctorRepository.existsById(id);
+        return IDoctorRepository.existsById(id);
     }
 }

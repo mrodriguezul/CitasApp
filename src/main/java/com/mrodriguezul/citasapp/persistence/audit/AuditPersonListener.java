@@ -1,6 +1,6 @@
 package com.mrodriguezul.citasapp.persistence.audit;
 
-import com.mrodriguezul.citasapp.persistence.entity.Person;
+import com.mrodriguezul.citasapp.persistence.entity.PersonEntity;
 import jakarta.persistence.PostLoad;
 import jakarta.persistence.PostPersist;
 import jakarta.persistence.PostUpdate;
@@ -8,32 +8,32 @@ import jakarta.persistence.PreUpdate;
 
 public class AuditPersonListener {
 
-    private Person currentPerson;
+    private PersonEntity currentPersonEntity;
 
     @PostLoad
-    public void postLoad(Person entity) {
+    public void postLoad(PersonEntity entity) {
         System.out.println("POST LOAD");
-        this.currentPerson = createPersonCopy(entity);
+        this.currentPersonEntity = createPersonCopy(entity);
     }
 
     @PreUpdate
-    public void onPreUpdate(Person entity) {
+    public void onPreUpdate(PersonEntity entity) {
         System.out.println("PRE UPDATE");
         System.out.println(entity.toString());
     }
 
     @PostPersist
     @PostUpdate
-    public void onPostPersist(Person entity) {
+    public void onPostPersist(PersonEntity entity) {
         System.out.println("POST PERSIST OR UPDATE");
-        System.out.println("LAST VALUE: " + (currentPerson != null ? currentPerson.toString() : "null"));
+        System.out.println("LAST VALUE: " + (currentPersonEntity != null ? currentPersonEntity.toString() : "null"));
         System.out.println("POST VALUE: " + entity.toString());
     }
 
-    private Person createPersonCopy(Person original) {
+    private PersonEntity createPersonCopy(PersonEntity original) {
         if (original == null) return null;
 
-        Person copy = new Person();
+        PersonEntity copy = new PersonEntity();
         copy.setId(original.getId());
         copy.setIdentificationNumber(original.getIdentificationNumber());
         copy.setNames(original.getNames());
@@ -41,7 +41,7 @@ public class AuditPersonListener {
         copy.setDateOfBirth(original.getDateOfBirth());
         copy.setEmail(original.getEmail());
         copy.setPhoneNumber(original.getPhoneNumber());
-        copy.setIdentification(original.getIdentification());
+        copy.setIdentificationEntity(original.getIdentificationEntity());
 
         return copy;
     }

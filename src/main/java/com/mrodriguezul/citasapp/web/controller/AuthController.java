@@ -1,6 +1,6 @@
 package com.mrodriguezul.citasapp.web.controller;
 
-import com.mrodriguezul.citasapp.domain.Usuario;
+import com.mrodriguezul.citasapp.domain.model.User;
 import com.mrodriguezul.citasapp.domain.service.UserSecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -21,8 +21,8 @@ public class AuthController {
     }
 
     @RequestMapping("/login")
-    public ResponseEntity<String> login(@RequestBody Usuario usuario) {
-        String token = userSecurityService.loginUser(usuario);
+    public ResponseEntity<String> login(@RequestBody User user) {
+        String token = userSecurityService.loginUser(user);
 
         System.out.println("Generated Token: " + token);
         return ResponseEntity.ok().header(HttpHeaders.AUTHORIZATION, "Bearer " + token).body("Login successful");

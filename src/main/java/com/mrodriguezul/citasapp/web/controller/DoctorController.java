@@ -1,7 +1,7 @@
 package com.mrodriguezul.citasapp.web.controller;
 
 
-import com.mrodriguezul.citasapp.domain.Doctor;
+import com.mrodriguezul.citasapp.domain.model.Doctor;
 import com.mrodriguezul.citasapp.domain.service.DoctorService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Tag(name = "Doctor", description = "Operacines relacionadas con doctores 👨‍🔬")
+@Tag(name = "Doctor", description = "Operations - doctors 👨‍🔬")
 @RestController
 @RequestMapping("/doctor")
 public class DoctorController {
@@ -28,20 +28,20 @@ public class DoctorController {
         this.doctorService = doctorService;
     }
 
-    @Operation(summary = "Obtener todos los doctores", description = "Retorna una lista de todos los doctores")
+    @Operation(summary = "Get all the doctors", description = "Return a list of all the doctors")
     @GetMapping
     public List<Doctor> getAll() {
         return doctorService.getAll();
     }
 
-    @Operation(summary = "Buscar doctores por nombre o apellido", description = "Retorna una lista de doctores que coinciden con el nombre o apellido proporcionado")
+    @Operation(summary = "Search for doctors by first or last name", description = "Returns a list of doctors that match the provided first or last name")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Doctores encontrados"),
-            @ApiResponse(responseCode = "404", description = "No se encontraron doctores")
+            @ApiResponse(responseCode = "200", description = "Doctors found"),
+            @ApiResponse(responseCode = "404", description = "Doctors not found")
     })
     @Parameters(value = {
-            @Parameter(name = "names", description = "Nombres del doctor a buscar", required = false, example = "Juan Carlos"),
-            @Parameter(name = "surnames", description = "Apellidos del doctor a buscar", required = false, example = "García López")
+            @Parameter(name = "names", description = "Doctor's name", required = false, example = "Juan Carlos"),
+            @Parameter(name = "surnames", description = "Doctor's surname", required = false, example = "García López")
     })
     @GetMapping("/search/name")
     public ResponseEntity<List<Doctor>> getDoctorsByNameOrSurname(
@@ -54,13 +54,13 @@ public class DoctorController {
         return ResponseEntity.ok(doctors);
     }
 
-    @Operation(summary = "Buscar doctores por especialidad", description = "Retorna una lista de doctores que pertenecen a una especialidad específica")
+    @Operation(summary = "Search for doctors by specialty", description = "Returns a list of doctors who belong to a specific specialty")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Doctores encontrados"),
-            @ApiResponse(responseCode = "404", description = "No se encontraron doctores para la especialidad")
+            @ApiResponse(responseCode = "200", description = "Doctors found"),
+            @ApiResponse(responseCode = "404", description = "No doctors could be found for the specialty")
     })
     @Parameters(value = {
-            @Parameter(name = "specialityId", description = "ID de la especialidad a buscar", required = true, example = "1")
+            @Parameter(name = "specialityId", description = "ID of the specialty to search for", required = true, example = "1")
     })
     @GetMapping("/specialty/{specialityId}")
     public ResponseEntity<List<Doctor>> getDoctorsBySpeciality(@PathVariable Long specialityId) {
@@ -71,13 +71,13 @@ public class DoctorController {
         return ResponseEntity.ok(doctors);
     }
 
-    @Operation(summary = "Obtener un doctor por ID", description = "Retorna un doctor específico por su ID")
+    @Operation(summary = "Get a doctor by ID", description = "Return a specific doctor by their ID")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Doctor encontrado"),
-            @ApiResponse(responseCode = "404", description = "Doctor no encontrado")
+            @ApiResponse(responseCode = "200", description = "Doctor found"),
+            @ApiResponse(responseCode = "404", description = "Doctor not found")
     })
     @Parameters(value = {
-            @Parameter(name = "id", description = "ID del doctor a buscar", required = true, example = "1")
+            @Parameter(name = "id", description = "ID of the doctor to search for", required = true, example = "1")
     })
     @GetMapping("/{id}")
     public ResponseEntity<Doctor> getDoctor(@PathVariable Long id) {
@@ -86,13 +86,13 @@ public class DoctorController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @Operation(summary = "Buscar doctor por número de identificación", description = "Retorna un doctor específico por su número de identificación")
+    @Operation(summary = "Search for a doctor by ID number", description = "A specific doctor returns by their identification number")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Doctor encontrado"),
-            @ApiResponse(responseCode = "404", description = "Doctor no encontrado")
+            @ApiResponse(responseCode = "200", description = "Doctor found"),
+            @ApiResponse(responseCode = "404", description = "Doctor not found")
     })
     @Parameters(value = {
-            @Parameter(name = "identificationNumber", description = "Número de identificación del doctor", required = true, example = "12345678")
+            @Parameter(name = "identificationNumber", description = "Doctor's identification number", required = true, example = "12345678")
     })
     @GetMapping("/identification/{identificationNumber}")
     public ResponseEntity<Doctor> getDoctorByIdentificationNumber(@PathVariable String identificationNumber) {
@@ -101,14 +101,14 @@ public class DoctorController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @Operation(summary = "Buscar doctor por tipo y número de identificación", description = "Retorna un doctor específico por su tipo y número de identificación")
+    @Operation(summary = "Search for a doctor by type and identification number", description = "A specific doctor returns by their type and identification number")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Doctor encontrado"),
-            @ApiResponse(responseCode = "404", description = "Doctor no encontrado")
+            @ApiResponse(responseCode = "200", description = "Doctor found"),
+            @ApiResponse(responseCode = "404", description = "Doctor not found")
     })
     @Parameters(value = {
-            @Parameter(name = "identificationId", description = "ID del tipo de identificación", required = true, example = "1"),
-            @Parameter(name = "identificationNumber", description = "Número de identificación del doctor", required = true, example = "12345678")
+            @Parameter(name = "identificationId", description = "ID of the identification type", required = true, example = "1"),
+            @Parameter(name = "identificationNumber", description = "Doctor's identification number", required = true, example = "12345678")
     })
     @GetMapping("/identification/{identificationId}/{identificationNumber}")
     public ResponseEntity<Doctor> getDoctorByIdentificationTypeAndNumber(
@@ -119,10 +119,10 @@ public class DoctorController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @Operation(summary = "Registrar un nuevo doctor", description = "Guarda la información de un nuevo doctor")
+    @Operation(summary = "Register a new doctor", description = "Save the information for a new doctor")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "201", description = "Doctor creado exitosamente"),
-        @ApiResponse(responseCode = "400", description = "Solicitud inválida")
+        @ApiResponse(responseCode = "201", description = "Doctor successfully created"),
+        @ApiResponse(responseCode = "400", description = "Invalid application")
     })
     @PostMapping
     public ResponseEntity<Doctor> create(@RequestBody Doctor doctor) {
@@ -132,10 +132,10 @@ public class DoctorController {
         return ResponseEntity.badRequest().build();
     }
 
-    @Operation(summary = "Actualiza datos de un doctor", description = "Actualiza la información de un doctor")
+    @Operation(summary = "Update a doctor's information", description = "Update a doctor's information")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Doctor actualizado exitosamente"),
-            @ApiResponse(responseCode = "400", description = "Solicitud inválida")
+            @ApiResponse(responseCode = "200", description = "Doctor successfully updated"),
+            @ApiResponse(responseCode = "400", description = "Invalid application")
     })
     @PutMapping
     public ResponseEntity<Doctor> update(@RequestBody Doctor doctor) {
@@ -145,10 +145,10 @@ public class DoctorController {
         return ResponseEntity.badRequest().build();
     }
 
-    @Operation(summary = "Eliminar un doctor por ID", description = "Elimina el doctor especificado por su ID")
+    @Operation(summary = "Remove a doctor by ID", description = "Remove the doctor specified by their ID")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "204", description = "Doctor eliminado exitosamente"),
-        @ApiResponse(responseCode = "404", description = "Doctor no encontrado")
+        @ApiResponse(responseCode = "204", description = "Doctor successfully removed"),
+        @ApiResponse(responseCode = "404", description = "Doctors not found")
     })
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {

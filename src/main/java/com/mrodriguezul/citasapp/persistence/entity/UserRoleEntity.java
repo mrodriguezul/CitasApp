@@ -25,7 +25,7 @@ public class UserRoleEntity {
     @Column(name = "granted_date", nullable = false, columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private LocalDateTime grantedDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "username", referencedColumnName = "username", insertable = false, updatable = false)
     private UserEntity user;
 
