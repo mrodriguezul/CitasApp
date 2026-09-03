@@ -17,8 +17,8 @@ FROM openjdk:17.0.1-jdk-slim
 # Set the working directory
 #WORKDIR /app
 # Copy the JAR file from the 'build' stage to the final image
-#COPY --from=build /app/target/citasapp-1.0.jar app.jar
-COPY --from=build /target/citasapp-1.0.jar app.jar
+#COPY --from=build /app/target/apptapp-1.0.jar app.jar
+COPY --from=build /target/appt-app-1.0.jar app.jar
 
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
